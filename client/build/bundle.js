@@ -63,6 +63,7 @@
 	  this.url = "http://localhost:5000/trans";
 	  this.transactions = [];
 	  this.getTransactions();
+	  this.total = 0;
 	};
 	
 	TotalView.prototype = {
@@ -86,8 +87,19 @@
 	
 	  display: function() {
 	    this.clear();
+	    this.total = 0;
+	
+	
+	    var navText = document.createElement( "h5" );
+	    navText.innerText = "Home";
+	    navText.onclick = function() {
+	      this.clear();
+	      this.displayHome();
+	    }.bind( this );
+	
 	
 	    var totalSpace = document.getElementById( "total-space" );
+	    totalSpace.appendChild( navText );
 	
 	    var totalText = document.createElement( "h3" );
 	    totalText.innerText = "Your cash";
@@ -98,7 +110,7 @@
 	
 	    var totals = document.createElement( "ul" );
 	    totals.style.display = "inline-block";
-	    
+	
 	    totalSpace.appendChild( totalText );
 	    totalSpace.appendChild( text );
 	    totalSpace.appendChild( totals );
@@ -115,15 +127,22 @@
 	      if( this.transactions[i].debit ) {
 	        amountText.innerText = amount;
 	        amountText.style.color = "black";
+	        this.total += amount;
 	      } else {
 	        amountText.innerText = "-" + amount;
 	        amountText.style.color = "red";
+	        this.total -= amount;
 	      }
 	      textList.appendChild( transaction );
 	      totalList.appendChild( amountText );
 	      text.appendChild( textList );
 	      totals.appendChild( totalList );
 	    }
+	
+	    var grandTotal = document.createElement( "h2" );
+	    grandTotal.innerText = this.total;
+	
+	    totalSpace.appendChild( grandTotal );
 	
 	  },
 	
@@ -132,7 +151,12 @@
 	    while( totalSpace.hasChildNodes() ) {
 	      totalSpace.removeChild( totalSpace.lastChild );
 	    }
-	  }
+	  },
+	
+	  displayHome: function() {
+	    var navView = document.getElementById( "nav-space" );
+	    navView.style.display = "block";
+	  },
 	};
 	
 	module.exports = TotalView;
