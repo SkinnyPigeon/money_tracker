@@ -1,4 +1,3 @@
-// var TransView = require( './views/TransView' );
 var NavView = require( './views/NavView' );
 
 window.onload = function() {
