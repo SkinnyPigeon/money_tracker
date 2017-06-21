@@ -31,18 +31,25 @@ TotalView.prototype = {
     var totalText = document.createElement( "h3" );
     totalText.innerText = "Your cash";
 
+    var text = document.createElement( "ul" );
+    text.style.display = "inline-block";
+    text.style.float = "left";
 
     var totals = document.createElement( "ul" );
+    totals.style.display = "inline-block";
+    
     totalSpace.appendChild( totalText );
+    totalSpace.appendChild( text );
     totalSpace.appendChild( totals );
 
     for ( var i = 0; i < this.transactions.length; i++ ) {
-      var list = document.createElement( "ul" );
+      var textList = document.createElement( "ul" );
+      var totalList = document.createElement( "ul" );
 
-      var transaction = document.createElement( "li" );
+      var transaction = document.createElement( "p" );
       transaction.innerText = this.transactions[i].description;
 
-      var amountText = document.createElement( "li" );
+      var amountText = document.createElement( "p" );
       var amount = this.transactions[i].amount;
       if( this.transactions[i].debit ) {
         amountText.innerText = amount;
@@ -51,9 +58,10 @@ TotalView.prototype = {
         amountText.innerText = "-" + amount;
         amountText.style.color = "red";
       }
-      list.appendChild( transaction );
-      list.appendChild( amountText );
-      totals.appendChild( list );
+      textList.appendChild( transaction );
+      totalList.appendChild( amountText );
+      text.appendChild( textList );
+      totals.appendChild( totalList );
     }
 
   },
