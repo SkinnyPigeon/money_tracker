@@ -61,13 +61,13 @@
 	var TotalView = __webpack_require__( 2 );
 	
 	var MainView = function(){
-	  this.start();
+	  this.display();
 	  this.url = "http://localhost:5000/trans";
 	};
 	
 	MainView.prototype = {
 	
-	  start: function() {
+	  display: function() {
 	
 	    var mainSpace = document.getElementById( "main-space" );
 	
@@ -103,6 +103,7 @@
 	    var transButton = document.createElement( "button" );
 	    transButton.innerText = "Add transaction";
 	    transButton.onclick = function() {
+	
 	      this.addTransaction( transBox.value, transAmount.value, transType.checked );
 	    }.bind( this );
 	
@@ -129,7 +130,7 @@
 	      request.open( 'POST', this.url );
 	      request.setRequestHeader("Content-Type", "application/json");
 	      request.onload = () => {
-	        this.display();
+	        this.displayTotal();
 	      }
 	      var data = {
 	        tran: {
@@ -142,7 +143,7 @@
 	      console.log( data.transaction );
 	  },
 	
-	  display: function() {
+	  displayTotal: function() {
 	    var view = new TotalView();
 	  }
 	
@@ -172,12 +173,16 @@
 	      if( request.status === 200 ) {
 	        var transactions = JSON.parse( request.responseText );
 	        this.transactions = transactions;
-	        // this.display();
+	        this.display();
 	        console.log( transactions );
 	      }
 	    }
 	    request.send( null );
 	  },
+	
+	  display: function() {
+	    
+	  }
 	};
 	
 	module.exports = TotalView;

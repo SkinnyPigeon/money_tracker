@@ -1,13 +1,13 @@
 var TotalView = require( './TotalView' );
 
 var MainView = function(){
-  this.start();
+  this.display();
   this.url = "http://localhost:5000/trans";
 };
 
 MainView.prototype = {
 
-  start: function() {
+  display: function() {
 
     var mainSpace = document.getElementById( "main-space" );
 
@@ -43,6 +43,7 @@ MainView.prototype = {
     var transButton = document.createElement( "button" );
     transButton.innerText = "Add transaction";
     transButton.onclick = function() {
+
       this.addTransaction( transBox.value, transAmount.value, transType.checked );
     }.bind( this );
 
@@ -69,7 +70,7 @@ MainView.prototype = {
       request.open( 'POST', this.url );
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = () => {
-        this.display();
+        this.displayTotal();
       }
       var data = {
         tran: {
@@ -82,7 +83,7 @@ MainView.prototype = {
       console.log( data.transaction );
   },
 
-  display: function() {
+  displayTotal: function() {
     var view = new TotalView();
   }
 

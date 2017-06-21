@@ -16,12 +16,16 @@ TotalView.prototype = {
       if( request.status === 200 ) {
         var transactions = JSON.parse( request.responseText );
         this.transactions = transactions;
-        // this.display();
+        this.display();
         console.log( transactions );
       }
     }
     request.send( null );
   },
+
+  display: function() {
+    
+  }
 };
 
 module.exports = TotalView;
