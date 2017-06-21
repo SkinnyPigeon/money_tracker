@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var MainView = __webpack_require__( 1 );
+	var MainView = __webpack_require__( !(function webpackMissingModule() { var e = new Error("Cannot find module \"./views/MainView\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()) );
 	
 	window.onload = function() {
 	  main();
@@ -53,24 +53,6 @@
 	var main = function(){
 	  var mainView = new MainView();
 	};
-
-/***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	var MainView = function(){
-	  this.start();
-	};
-	
-	MainView.prototype = {
-	
-	  start: function() {
-	
-	  },
-	
-	};
-	
-	module.exports = MainView;
 
 /***/ }
 /******/ ]);
