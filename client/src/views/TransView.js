@@ -39,7 +39,6 @@ TransView.prototype = {
     var transTypeText = document.createElement( "p" );
     transTypeText.innerText = "😫";
 
-
     var transButton = document.createElement( "button" );
     transButton.innerText = "Add transaction";
     transButton.onclick = function() {
@@ -49,7 +48,7 @@ TransView.prototype = {
         this.displayWarning( transBox.value, transAmount.value );
         return;
       }
-      // this.addTransaction( transBox.value, transAmount.value, transType.checked );
+      this.addTransaction( transBox.value, transAmount.value, transType.checked );
     }.bind( this );
 
     tranSpace.appendChild( transText );
