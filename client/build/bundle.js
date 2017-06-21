@@ -72,12 +72,12 @@
 	    transText.innerText = "Transaction: ";
 	
 	    var transBox = document.createElement( "input" );
-	    transBox.placeHolder = "Transaction description...";
+	    transBox.placeholder = "Transaction description...";
 	    transBox.id = "tranBoxID";
 	
-	    var amount = document.createElement( "input" );
-	    amount.placeHolder = "How much?  ";
-	    amount.type = "number";
+	    var transAmount = document.createElement( "input" );
+	    transAmount.placeholder = "How much?  ";
+	    transAmount.type = "number";
 	
 	    var transInOut = document.createElement( "p" );
 	    transInOut.innerText = "In or Out?";
@@ -86,13 +86,13 @@
 	    transType.type = "checkbox";
 	    transType.id = "transTypeID";
 	
-	    var typeText = document.createElement( "p" );
-	    typeText.innerText = "😫";
+	    var transTypeText = document.createElement( "p" );
+	    transTypeText.innerText = "😫";
 	
 	    if( transType.checked ) {
-	      typeText.innerText = "😫"
+	      transTypeText.innerText = "😫"
 	    } else {
-	      typeText.innerText = "😁"
+	      transTypeText.innerText = "😁"
 	    };
 	
 	    var transButton = document.createElement( "button" );
@@ -102,6 +102,12 @@
 	    };
 	
 	    mainSpace.appendChild( transText );
+	    mainSpace.appendChild( transBox );
+	    mainSpace.appendChild( transAmount );
+	    mainSpace.appendChild( transInOut );
+	    mainSpace.appendChild( transType );
+	    mainSpace.appendChild( transTypeText );
+	    mainSpace.appendChild( transButton );
 	
 	
 	  },
