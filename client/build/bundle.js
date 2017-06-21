@@ -100,8 +100,8 @@
 	    var transButton = document.createElement( "button" );
 	    transButton.innerText = "Add transaction";
 	    transButton.onclick = function() {
-	      console.log( "Hello Again" );
-	    };
+	      this.addTransaction();
+	    }.bind( this );
 	
 	    mainSpace.appendChild( transText );
 	    mainSpace.appendChild( transBox );
@@ -110,9 +110,11 @@
 	    mainSpace.appendChild( transType );
 	    mainSpace.appendChild( transTypeText );
 	    mainSpace.appendChild( transButton );
-	
-	
 	  },
+	
+	  addTransaction: function() {
+	      console.log( "Hello Again" );
+	  }
 	
 	};
 	
