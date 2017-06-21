@@ -71,18 +71,18 @@ TransView.prototype = {
 
   addTransaction: function( description, amount, type ) {
 
-      var debit = false;
+      var debit = true;
       if ( type ) {
-        debit = true;
-      } else {
         debit = false;
+      } else {
+        debit = true;
       }
 
       var request = new XMLHttpRequest();
       request.open( 'POST', this.url );
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = () => {
-        this.displayTotal();
+        this.display();
       }
       var data = {
         tran: {

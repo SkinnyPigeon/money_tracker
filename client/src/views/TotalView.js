@@ -6,6 +6,7 @@ var TotalView = function() {
 };
 
 TotalView.prototype = {
+
   getTransactions: function() {
     var totalSpace = document.getElementById( 'total-space' );
     totalSpace.innerText = "";
@@ -28,14 +29,12 @@ TotalView.prototype = {
     this.clear();
     this.total = 0;
 
-
     var navText = document.createElement( "h5" );
     navText.innerText = "Home";
     navText.onclick = function() {
       this.clear();
       this.displayHome();
     }.bind( this );
-
 
     var totalSpace = document.getElementById( "total-space" );
     totalSpace.appendChild( navText );
@@ -55,6 +54,7 @@ TotalView.prototype = {
     totalSpace.appendChild( totals );
 
     for ( var i = 0; i < this.transactions.length; i++ ) {
+
       var textList = document.createElement( "ul" );
       var totalList = document.createElement( "ul" );
 
@@ -63,15 +63,17 @@ TotalView.prototype = {
 
       var amountText = document.createElement( "p" );
       var amount = this.transactions[i].amount;
+
       if( this.transactions[i].debit ) {
-        amountText.innerText = amount;
-        amountText.style.color = "black";
-        this.total += amount;
-      } else {
-        amountText.innerText = "-" + amount;
+        amountText.innerText = "-" + parseFloat(Math.round(amount * 100) / 100).toFixed(2);
         amountText.style.color = "red";
-        this.total -= amount;
+        this.total -= parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+      } else {
+        amountText.innerText = parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        amountText.style.color = "black";
+        this.total += parseFloat(Math.round(amount * 100) / 100).toFixed(2);
       }
+
       textList.appendChild( transaction );
       totalList.appendChild( amountText );
       text.appendChild( textList );
@@ -79,7 +81,7 @@ TotalView.prototype = {
     }
 
     var grandTotal = document.createElement( "h2" );
-    grandTotal.innerText = this.total;
+    grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
 
     totalSpace.appendChild( grandTotal );
 

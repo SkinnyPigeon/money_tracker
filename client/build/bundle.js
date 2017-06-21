@@ -67,6 +67,7 @@
 	};
 	
 	TotalView.prototype = {
+	
 	  getTransactions: function() {
 	    var totalSpace = document.getElementById( 'total-space' );
 	    totalSpace.innerText = "";
@@ -89,14 +90,12 @@
 	    this.clear();
 	    this.total = 0;
 	
-	
 	    var navText = document.createElement( "h5" );
 	    navText.innerText = "Home";
 	    navText.onclick = function() {
 	      this.clear();
 	      this.displayHome();
 	    }.bind( this );
-	
 	
 	    var totalSpace = document.getElementById( "total-space" );
 	    totalSpace.appendChild( navText );
@@ -116,6 +115,7 @@
 	    totalSpace.appendChild( totals );
 	
 	    for ( var i = 0; i < this.transactions.length; i++ ) {
+	
 	      var textList = document.createElement( "ul" );
 	      var totalList = document.createElement( "ul" );
 	
@@ -124,15 +124,17 @@
 	
 	      var amountText = document.createElement( "p" );
 	      var amount = this.transactions[i].amount;
+	
 	      if( this.transactions[i].debit ) {
-	        amountText.innerText = amount;
-	        amountText.style.color = "black";
-	        this.total += amount;
-	      } else {
-	        amountText.innerText = "-" + amount;
+	        amountText.innerText = "-" + parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	        amountText.style.color = "red";
-	        this.total -= amount;
+	        this.total -= parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	      } else {
+	        amountText.innerText = parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        amountText.style.color = "black";
+	        this.total += parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	      }
+	
 	      textList.appendChild( transaction );
 	      totalList.appendChild( amountText );
 	      text.appendChild( textList );
@@ -140,7 +142,7 @@
 	    }
 	
 	    var grandTotal = document.createElement( "h2" );
-	    grandTotal.innerText = this.total;
+	    grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
 	
 	    totalSpace.appendChild( grandTotal );
 	
@@ -238,18 +240,18 @@
 	
 	  addTransaction: function( description, amount, type ) {
 	
-	      var debit = false;
+	      var debit = true;
 	      if ( type ) {
-	        debit = true;
-	      } else {
 	        debit = false;
+	      } else {
+	        debit = true;
 	      }
 	
 	      var request = new XMLHttpRequest();
 	      request.open( 'POST', this.url );
 	      request.setRequestHeader("Content-Type", "application/json");
 	      request.onload = () => {
-	        this.displayTotal();
+	        this.display();
 	      }
 	      var data = {
 	        tran: {
