@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "highcharts": "^5.0.12"
   }
 }

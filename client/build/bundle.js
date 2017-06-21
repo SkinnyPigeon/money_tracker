@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var NavView = __webpack_require__( 4 );
+	var NavView = __webpack_require__( 1 );
 	
 	window.onload = function() {
 	  nav();
@@ -55,129 +55,68 @@
 	};
 
 /***/ },
-/* 1 */,
-/* 2 */
-/***/ function(module, exports) {
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var TotalView = function() {
-	  this.url = "http://localhost:5000/trans";
-	  this.transactions = [];
-	  this.getTransactions();
-	  this.total = 0;
+	var TransView = __webpack_require__( 2 );
+	var TotalView = __webpack_require__( 3 );
+	
+	function NavView() {
+	  this.clear();
+	  this.display();
 	};
 	
-	TotalView.prototype = {
+	NavView.prototype = {
+	  clear: function() {
 	
-	  getTransactions: function() {
-	    var totalSpace = document.getElementById( 'total-space' );
-	    totalSpace.innerText = "";
-	    var request = new XMLHttpRequest();
-	    request.open( 'GET', this.url );
-	    request.setRequestHeader("Content-Type", "application/json")
+	    var navSpace = document.getElementById( "nav-space" );
+	    var tranSpace = document.getElementById( "trans-space" );
+	    var warnSpace = document.getElementById( "warn-space" );
+	    var transactionSpace = document.getElementById( "transaction-space" );
 	
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var transactions = JSON.parse( request.responseText );
-	        this.transactions = transactions;
-	        this.display();
-	        console.log( transactions );
-	      }
-	    }
-	    request.send( null );
+	    navSpace.style.display = "none";
+	
 	  },
 	
 	  display: function() {
-	    this.clear();
-	    this.total = 0;
 	
-	    var navText = document.createElement( "h5" );
-	    navText.innerText = "Home";
-	    navText.onclick = function() {
+	    var navSpace = document.getElementById( "nav-space" );
+	    navSpace.style.display = "block";
+	
+	    var transactions = document.createElement( "h5" );
+	    transactions.innerText = "transactions";
+	    transactions.onclick = function() {
 	      this.clear();
-	      this.displayHome();
+	      var transView = new TransView();
 	    }.bind( this );
 	
-	    var totalSpace = document.getElementById( "total-space" );
-	    totalSpace.appendChild( navText );
+	    var totals = document.createElement( "h5" );
+	    totals.innerText = "totals";
+	    totals.onclick = function() {
+	      this.clear();
+	      var totalView = new TotalView();
+	    }.bind( this );
 	
-	    var totalText = document.createElement( "h3" );
-	    totalText.innerText = "Your cash";
+	    var graphs = document.createElement( "h5" );
+	    graphs.innerText = "graphs";
+	    graphs.onclick = function() {
+	      console.log( "graphs" );
+	    };
 	
-	    var text = document.createElement( "ul" );
-	    text.style.display = "inline-block";
-	    text.style.float = "left";
-	
-	    var totals = document.createElement( "ul" );
-	    totals.style.display = "inline-block";
-	
-	    totalSpace.appendChild( totalText );
-	    totalSpace.appendChild( text );
-	    totalSpace.appendChild( totals );
-	
-	    for ( var i = 0; i < this.transactions.length; i++ ) {
-	
-	      var textList = document.createElement( "ul" );
-	      var totalList = document.createElement( "ul" );
-	
-	      var transaction = document.createElement( "p" );
-	      transaction.innerText = this.transactions[i].description;
-	
-	      var amountText = document.createElement( "p" );
-	      var amount = this.transactions[i].amount;
-	
-	      if( this.transactions[i].debit ) {
-	        amountText.innerText = "-" + 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	        amountText.style.color = "red";
-	        this.total -= 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	      } else {
-	        amountText.innerText = 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	        amountText.style.color = "black";
-	        this.total += 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	      }
-	
-	      textList.appendChild( transaction );
-	      totalList.appendChild( amountText );
-	      text.appendChild( textList );
-	      totals.appendChild( totalList );
-	    }
-	
-	    var grandTotal = document.createElement( "h2" );
-	    if ( this.total < 0 ) {
-	      grandTotal.style.color = "red";
-	    } else {
-	      grandTotal.style.color = "black";
-	    }
-	    grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
-	
-	    totalSpace.appendChild( grandTotal );
-	
-	  },
-	
-	  clear: function() {
-	    var totalSpace = document.getElementById( "total-space" );
-	    while( totalSpace.hasChildNodes() ) {
-	      totalSpace.removeChild( totalSpace.lastChild );
-	    }
-	  },
-	
-	  displayHome: function() {
-	    var navView = document.getElementById( "nav-space" );
-	    navView.style.display = "block";
+	    navSpace.appendChild( transactions );
+	    navSpace.appendChild( totals );
+	    navSpace.appendChild( graphs );
 	  },
 	};
 	
-	module.exports = TotalView;
+	module.exports = NavView;
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var NavView = __webpack_require__( 4 );
-	var TotalView = __webpack_require__( 2 );
+	var NavView = __webpack_require__( 1 );
+	var TotalView = __webpack_require__( 3 );
 	
 	function TransView() {
 	  this.display();
@@ -314,61 +253,121 @@
 	module.exports = TransView;
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/* 3 */
+/***/ function(module, exports) {
 
-	var TransView = __webpack_require__( 3 );
-	var TotalView = __webpack_require__( 2 );
-	
-	function NavView() {
-	  this.clear();
-	  this.display();
+	var TotalView = function() {
+	  this.url = "http://localhost:5000/trans";
+	  this.transactions = [];
+	  this.getTransactions();
+	  this.total = 0;
 	};
 	
-	NavView.prototype = {
-	  clear: function() {
+	TotalView.prototype = {
 	
-	    var navSpace = document.getElementById( "nav-space" );
-	    var tranSpace = document.getElementById( "trans-space" );
-	    var warnSpace = document.getElementById( "warn-space" );
-	    var transactionSpace = document.getElementById( "transaction-space" );
+	  getTransactions: function() {
+	    var totalSpace = document.getElementById( 'total-space' );
+	    totalSpace.innerText = "";
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.url );
+	    request.setRequestHeader("Content-Type", "application/json")
 	
-	    navSpace.style.display = "none";
-	
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var transactions = JSON.parse( request.responseText );
+	        this.transactions = transactions;
+	        this.display();
+	        console.log( transactions );
+	      }
+	    }
+	    request.send( null );
 	  },
 	
 	  display: function() {
+	    this.clear();
+	    this.total = 0;
 	
-	    var navSpace = document.getElementById( "nav-space" );
-	    navSpace.style.display = "block";
-	
-	    var transactions = document.createElement( "h5" );
-	    transactions.innerText = "transactions";
-	    transactions.onclick = function() {
+	    var navText = document.createElement( "h5" );
+	    navText.innerText = "Home";
+	    navText.onclick = function() {
 	      this.clear();
-	      var transView = new TransView();
+	      this.displayHome();
 	    }.bind( this );
 	
-	    var totals = document.createElement( "h5" );
-	    totals.innerText = "totals";
-	    totals.onclick = function() {
-	      this.clear();
-	      var totalView = new TotalView();
-	    }.bind( this );
+	    var totalSpace = document.getElementById( "total-space" );
+	    totalSpace.appendChild( navText );
 	
-	    var graphs = document.createElement( "h5" );
-	    graphs.innerText = "graphs";
-	    graphs.onclick = function() {
-	      console.log( "graphs" );
-	    };
+	    var totalText = document.createElement( "h3" );
+	    totalText.innerText = "Your cash";
 	
-	    navSpace.appendChild( transactions );
-	    navSpace.appendChild( totals );
-	    navSpace.appendChild( graphs );
+	    var text = document.createElement( "ul" );
+	    text.style.display = "inline-block";
+	    text.style.float = "left";
+	
+	    var totals = document.createElement( "ul" );
+	    totals.style.display = "inline-block";
+	
+	    totalSpace.appendChild( totalText );
+	    totalSpace.appendChild( text );
+	    totalSpace.appendChild( totals );
+	
+	    for ( var i = 0; i < this.transactions.length; i++ ) {
+	
+	      var textList = document.createElement( "ul" );
+	      var totalList = document.createElement( "ul" );
+	
+	      var transaction = document.createElement( "p" );
+	      transaction.innerText = this.transactions[i].description;
+	
+	      var amountText = document.createElement( "p" );
+	      var amount = this.transactions[i].amount;
+	
+	      if( this.transactions[i].debit ) {
+	        amountText.innerText = "-" + 
+	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        amountText.style.color = "red";
+	        this.total -= 
+	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	      } else {
+	        amountText.innerText = 
+	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        amountText.style.color = "black";
+	        this.total += 
+	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	      }
+	
+	      textList.appendChild( transaction );
+	      totalList.appendChild( amountText );
+	      text.appendChild( textList );
+	      totals.appendChild( totalList );
+	    }
+	
+	    var grandTotal = document.createElement( "h2" );
+	    if ( this.total < 0 ) {
+	      grandTotal.style.color = "red";
+	    } else {
+	      grandTotal.style.color = "black";
+	    }
+	    grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
+	
+	    totalSpace.appendChild( grandTotal );
+	
+	  },
+	
+	  clear: function() {
+	    var totalSpace = document.getElementById( "total-space" );
+	    while( totalSpace.hasChildNodes() ) {
+	      totalSpace.removeChild( totalSpace.lastChild );
+	    }
+	  },
+	
+	  displayHome: function() {
+	    var navView = document.getElementById( "nav-space" );
+	    navView.style.display = "block";
 	  },
 	};
 	
-	module.exports = NavView;
+	module.exports = TotalView;
 
 /***/ }
 /******/ ]);
