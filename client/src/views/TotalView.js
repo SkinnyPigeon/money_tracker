@@ -65,13 +65,17 @@ TotalView.prototype = {
       var amount = this.transactions[i].amount;
 
       if( this.transactions[i].debit ) {
-        amountText.innerText = "-" + parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        amountText.innerText = "-" + 
+          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
         amountText.style.color = "red";
-        this.total -= parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        this.total -= 
+          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
       } else {
-        amountText.innerText = parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        amountText.innerText = 
+          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
         amountText.style.color = "black";
-        this.total += parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        this.total += 
+          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
       }
 
       textList.appendChild( transaction );
@@ -81,6 +85,11 @@ TotalView.prototype = {
     }
 
     var grandTotal = document.createElement( "h2" );
+    if ( this.total < 0 ) {
+      grandTotal.style.color = "red";
+    } else {
+      grandTotal.style.color = "black";
+    }
     grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
 
     totalSpace.appendChild( grandTotal );
