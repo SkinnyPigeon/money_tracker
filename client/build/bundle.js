@@ -85,15 +85,17 @@
 	    var transType = document.createElement( "input" );
 	    transType.type = "checkbox";
 	    transType.id = "transTypeID";
+	    transType.onclick = function() {
+	      if( !transType.checked ) {
+	        transTypeText.innerText = "😫"
+	      } else {
+	        transTypeText.innerText = "😁"
+	      }
+	    }
 	
 	    var transTypeText = document.createElement( "p" );
 	    transTypeText.innerText = "😫";
 	
-	    if( transType.checked ) {
-	      transTypeText.innerText = "😫"
-	    } else {
-	      transTypeText.innerText = "😁"
-	    };
 	
 	    var transButton = document.createElement( "button" );
 	    transButton.innerText = "Add transaction";
