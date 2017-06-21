@@ -60,6 +60,7 @@
 
 	var MainView = function(){
 	  this.start();
+	  this.url = "http://localhost:5000/trans";
 	};
 	
 	MainView.prototype = {
@@ -100,7 +101,7 @@
 	    var transButton = document.createElement( "button" );
 	    transButton.innerText = "Add transaction";
 	    transButton.onclick = function() {
-	      this.addTransaction();
+	      this.addTransaction( transBox.value, transAmount.value, transType.checked );
 	    }.bind( this );
 	
 	    mainSpace.appendChild( transText );
@@ -112,8 +113,31 @@
 	    mainSpace.appendChild( transButton );
 	  },
 	
-	  addTransaction: function() {
-	      console.log( "Hello Again" );
+	  addTransaction: function( description, amount, type ) {
+	      console.log( type );
+	
+	      var debit = false;
+	      if ( type ) {
+	        debit = true;
+	      } else {
+	        debit = false;
+	      }
+	
+	      var request = new XMLHttpRequest();
+	      request.open( 'POST', this.url );
+	      request.setRequestHeader("Content-Type", "application/json");
+	      request.onload = () => {
+	        // console.log( tran );
+	      }
+	      var data = {
+	        tran: {
+	          description: description,
+	          amount: amount,
+	          debit: debit,
+	        }
+	      }
+	      request.send( JSON.stringify( data ));
+	      console.log( data.transaction );
 	  }
 	
 	};
