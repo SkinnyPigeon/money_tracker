@@ -24,7 +24,17 @@ TotalView.prototype = {
   },
 
   display: function() {
-    
+    this.clear();
+
+    var totalSpace = document.getElementById( "total-space" );
+    var totals = document.createElement( "ul" );
+  },
+
+  clear: function() {
+    var totalSpace = document.getElementById( "total-space" );
+    while( totalSpace.hasChildNodes() ) {
+      totalSpace.removeChild( totalSpace.lastChild );
+    }
   }
 };
 

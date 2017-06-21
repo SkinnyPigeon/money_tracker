@@ -85,7 +85,17 @@
 	  },
 	
 	  display: function() {
-	    
+	    this.clear();
+	
+	    var totalSpace = document.getElementById( "total-space" );
+	    var totals = document.createElement( "ul" );
+	  },
+	
+	  clear: function() {
+	    var totalSpace = document.getElementById( "total-space" );
+	    while( totalSpace.hasChildNodes() ) {
+	      totalSpace.removeChild( totalSpace.lastChild );
+	    }
 	  }
 	};
 	
@@ -233,6 +243,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var TransView = __webpack_require__( 3 );
+	var TotalView = __webpack_require__( 2 );
 	
 	function NavView() {
 	  this.clear();
@@ -248,9 +259,6 @@
 	    var transactionSpace = document.getElementById( "transaction-space" );
 	
 	    navSpace.style.display = "none";
-	    tranSpace.style.display = "none";
-	    warnSpace.style.display = "none";
-	    transactionSpace.style.display = "none";
 	
 	  },
 	
@@ -264,14 +272,13 @@
 	    transactions.onclick = function() {
 	      this.clear();
 	      var transView = new TransView();
-	      var tranSpace = document.getElementById( "trans-space" );
-	      tranSpace.style.display = "block";
 	    }.bind( this );
 	
 	    var totals = document.createElement( "h5" );
 	    totals.innerText = "totals";
 	    totals.onclick = function() {
-	      console.log( "totals" );
+	      this.clear();
+	      var totalView = new TotalView();
 	    };
 	
 	    var graphs = document.createElement( "h5" );

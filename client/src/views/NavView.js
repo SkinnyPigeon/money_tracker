@@ -1,4 +1,5 @@
 var TransView = require( './TransView' );
+var TotalView = require( './TotalView' );
 
 function NavView() {
   this.clear();
@@ -14,9 +15,6 @@ NavView.prototype = {
     var transactionSpace = document.getElementById( "transaction-space" );
 
     navSpace.style.display = "none";
-    tranSpace.style.display = "none";
-    warnSpace.style.display = "none";
-    transactionSpace.style.display = "none";
 
   },
 
@@ -30,14 +28,13 @@ NavView.prototype = {
     transactions.onclick = function() {
       this.clear();
       var transView = new TransView();
-      var tranSpace = document.getElementById( "trans-space" );
-      tranSpace.style.display = "block";
     }.bind( this );
 
     var totals = document.createElement( "h5" );
     totals.innerText = "totals";
     totals.onclick = function() {
-      console.log( "totals" );
+      this.clear();
+      var totalView = new TotalView();
     };
 
     var graphs = document.createElement( "h5" );
