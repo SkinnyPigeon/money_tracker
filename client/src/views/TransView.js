@@ -43,8 +43,10 @@ TransView.prototype = {
     var transButton = document.createElement( "button" );
     transButton.innerText = "Add transaction";
     transButton.onclick = function() {
+      var warnSpace = document.getElementById( "warn-space" );
+      warnSpace.innerText = "";
       if(( !transBox.value ) || ( !transAmount.value )) {
-        console.log( "empty" );
+        this.displayWarning( transBox.value, transAmount.value );
         return;
       }
       // this.addTransaction( transBox.value, transAmount.value, transType.checked );
@@ -60,7 +62,6 @@ TransView.prototype = {
   },
 
   addTransaction: function( description, amount, type ) {
-      console.log( type );
 
       var debit = false;
       if ( type ) {
@@ -88,7 +89,23 @@ TransView.prototype = {
 
   displayTotal: function() {
     var view = new TotalView();
-  }
+  },
+
+  displayWarning: function( description, amount ) {
+    var warnSpace = document.getElementById( "warn-space" );
+    warnSpace.innerText = "";
+    if( !description ) {
+      var descriptionWarning = document.createElement( "p" );
+      descriptionWarning.innerText = "Please add a description";
+      warnSpace.appendChild( descriptionWarning );
+    }
+    if( !amount ) {
+      var amountWarning = document.createElement( "p" );
+      amountWarning.innerText = "Please add a amount";
+      warnSpace.appendChild( amountWarning );
+    }
+  },
+
 
 };
 
