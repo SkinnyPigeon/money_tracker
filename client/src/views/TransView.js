@@ -1,15 +1,15 @@
 var TotalView = require( './TotalView' );
 
-var MainView = function(){
+var TransView = function(){
   this.display();
   this.url = "http://localhost:5000/trans";
 };
 
-MainView.prototype = {
+TransView.prototype = {
 
   display: function() {
 
-    var mainSpace = document.getElementById( "main-space" );
+    var tranSpace = document.getElementById( "trans-space" );
 
     var transText = document.createElement( "p" );
     transText.innerText = "Transaction: ";
@@ -32,7 +32,7 @@ MainView.prototype = {
       if( !transType.checked ) {
         transTypeText.innerText = "😫"
       } else {
-        transTypeText.innerText = "😁"
+        transTypeText.innerText ="😁"
       }
     }
 
@@ -43,17 +43,20 @@ MainView.prototype = {
     var transButton = document.createElement( "button" );
     transButton.innerText = "Add transaction";
     transButton.onclick = function() {
-
-      this.addTransaction( transBox.value, transAmount.value, transType.checked );
+      if(( !transBox.value ) || ( !transAmount.value )) {
+        console.log( "empty" );
+        return;
+      }
+      // this.addTransaction( transBox.value, transAmount.value, transType.checked );
     }.bind( this );
 
-    mainSpace.appendChild( transText );
-    mainSpace.appendChild( transBox );
-    mainSpace.appendChild( transAmount );
-    mainSpace.appendChild( transInOut );
-    mainSpace.appendChild( transType );
-    mainSpace.appendChild( transTypeText );
-    mainSpace.appendChild( transButton );
+    tranSpace.appendChild( transText );
+    tranSpace.appendChild( transBox );
+    tranSpace.appendChild( transAmount );
+    tranSpace.appendChild( transInOut );
+    tranSpace.appendChild( transType );
+    tranSpace.appendChild( transTypeText );
+    tranSpace.appendChild( transButton );
   },
 
   addTransaction: function( description, amount, type ) {
@@ -89,4 +92,4 @@ MainView.prototype = {
 
 };
 
-module.exports = MainView;
+module.exports = TransView;

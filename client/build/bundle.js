@@ -44,32 +44,69 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var MainView = __webpack_require__( 1 );
+	var TransView = __webpack_require__( 3 );
 	
 	window.onload = function() {
-	  main();
+	  trans();
 	};
 	
-	var main = function(){
-	  var mainView = new MainView();
+	var trans = function(){
+	  var transView = new TransView();
 	};
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
+/***/ function(module, exports) {
+
+	var TotalView = function() {
+	  this.url = "http://localhost:5000/trans";
+	  this.transactions = [];
+	  this.getTransactions();
+	};
+	
+	TotalView.prototype = {
+	  getTransactions: function() {
+	    var transactionSpace = document.getElementById( 'transaction-space' );
+	    transactionSpace.innerText = "";
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.url );
+	    request.setRequestHeader("Content-Type", "application/json")
+	
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var transactions = JSON.parse( request.responseText );
+	        this.transactions = transactions;
+	        this.display();
+	        console.log( transactions );
+	      }
+	    }
+	    request.send( null );
+	  },
+	
+	  display: function() {
+	    
+	  }
+	};
+	
+	module.exports = TotalView;
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var TotalView = __webpack_require__( 2 );
 	
-	var MainView = function(){
+	var TransView = function(){
 	  this.display();
 	  this.url = "http://localhost:5000/trans";
 	};
 	
-	MainView.prototype = {
+	TransView.prototype = {
 	
 	  display: function() {
 	
-	    var mainSpace = document.getElementById( "main-space" );
+	    var tranSpace = document.getElementById( "trans-space" );
 	
 	    var transText = document.createElement( "p" );
 	    transText.innerText = "Transaction: ";
@@ -92,7 +129,7 @@
 	      if( !transType.checked ) {
 	        transTypeText.innerText = "😫"
 	      } else {
-	        transTypeText.innerText = "😁"
+	        transTypeText.innerText ="😁"
 	      }
 	    }
 	
@@ -103,17 +140,20 @@
 	    var transButton = document.createElement( "button" );
 	    transButton.innerText = "Add transaction";
 	    transButton.onclick = function() {
-	
-	      this.addTransaction( transBox.value, transAmount.value, transType.checked );
+	      if(( !transBox.value ) || ( !transAmount.value )) {
+	        console.log( "empty" );
+	        return;
+	      }
+	      // this.addTransaction( transBox.value, transAmount.value, transType.checked );
 	    }.bind( this );
 	
-	    mainSpace.appendChild( transText );
-	    mainSpace.appendChild( transBox );
-	    mainSpace.appendChild( transAmount );
-	    mainSpace.appendChild( transInOut );
-	    mainSpace.appendChild( transType );
-	    mainSpace.appendChild( transTypeText );
-	    mainSpace.appendChild( transButton );
+	    tranSpace.appendChild( transText );
+	    tranSpace.appendChild( transBox );
+	    tranSpace.appendChild( transAmount );
+	    tranSpace.appendChild( transInOut );
+	    tranSpace.appendChild( transType );
+	    tranSpace.appendChild( transTypeText );
+	    tranSpace.appendChild( transButton );
 	  },
 	
 	  addTransaction: function( description, amount, type ) {
@@ -149,43 +189,7 @@
 	
 	};
 	
-	module.exports = MainView;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	var TotalView = function() {
-	  this.url = "http://localhost:5000/trans";
-	  this.transactions = [];
-	  this.getTransactions();
-	};
-	
-	TotalView.prototype = {
-	  getTransactions: function() {
-	    var transactionSpace = document.getElementById( 'transaction-space' );
-	    transactionSpace.innerText = "";
-	    var request = new XMLHttpRequest();
-	    request.open( 'GET', this.url );
-	    request.setRequestHeader("Content-Type", "application/json")
-	
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var transactions = JSON.parse( request.responseText );
-	        this.transactions = transactions;
-	        this.display();
-	        console.log( transactions );
-	      }
-	    }
-	    request.send( null );
-	  },
-	
-	  display: function() {
-	    
-	  }
-	};
-	
-	module.exports = TotalView;
+	module.exports = TransView;
 
 /***/ }
 /******/ ]);

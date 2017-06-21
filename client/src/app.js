@@ -1,9 +1,9 @@
-var MainView = require( './views/MainView' );
+var TransView = require( './views/TransView' );
 
 window.onload = function() {
-  main();
+  trans();
 };
 
-var main = function(){
-  var mainView = new MainView();
+var trans = function(){
+  var transView = new TransView();
 };
