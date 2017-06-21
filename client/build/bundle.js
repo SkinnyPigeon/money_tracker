@@ -100,10 +100,10 @@
 	    for ( var i = 0; i < this.transactions.length; i++ ) {
 	      var list = document.createElement( "ul" );
 	
-	      var transaction = document.createElement( "p" );
+	      var transaction = document.createElement( "li" );
 	      transaction.innerText = this.transactions[i].description;
 	
-	      var amountText = document.createElement( "p" );
+	      var amountText = document.createElement( "li" );
 	      var amount = this.transactions[i].amount;
 	      if( this.transactions[i].debit ) {
 	        amountText.innerText = amount;
@@ -112,8 +112,9 @@
 	        amountText.innerText = "-" + amount;
 	        amountText.style.color = "red";
 	      }
-	      totals.appendChild( transaction );
-	      totals.appendChild( amountText );
+	      list.appendChild( transaction );
+	      list.appendChild( amountText );
+	      totals.appendChild( list );
 	    }
 	
 	  },
