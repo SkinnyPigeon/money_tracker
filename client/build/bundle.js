@@ -67,8 +67,8 @@
 	
 	TotalView.prototype = {
 	  getTransactions: function() {
-	    var transactionSpace = document.getElementById( 'transaction-space' );
-	    transactionSpace.innerText = "";
+	    var totalSpace = document.getElementById( 'total-space' );
+	    totalSpace.innerText = "";
 	    var request = new XMLHttpRequest();
 	    request.open( 'GET', this.url );
 	    request.setRequestHeader("Content-Type", "application/json")
@@ -88,7 +88,18 @@
 	    this.clear();
 	
 	    var totalSpace = document.getElementById( "total-space" );
+	
+	    var totalText = document.createElement( "h3" );
+	    totalText.innerText = "Your cash";
+	
+	
 	    var totals = document.createElement( "ul" );
+	    totalSpace.appendChild( totalText );
+	    totalSpace.appendChild( totals );
+	
+	    for ( var i = 0; i < this.transactions.length; i++ ) {
+	
+	    }
 	  },
 	
 	  clear: function() {
@@ -279,7 +290,7 @@
 	    totals.onclick = function() {
 	      this.clear();
 	      var totalView = new TotalView();
-	    };
+	    }.bind( this );
 	
 	    var graphs = document.createElement( "h5" );
 	    graphs.innerText = "graphs";

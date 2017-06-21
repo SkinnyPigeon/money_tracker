@@ -6,8 +6,8 @@ var TotalView = function() {
 
 TotalView.prototype = {
   getTransactions: function() {
-    var transactionSpace = document.getElementById( 'transaction-space' );
-    transactionSpace.innerText = "";
+    var totalSpace = document.getElementById( 'total-space' );
+    totalSpace.innerText = "";
     var request = new XMLHttpRequest();
     request.open( 'GET', this.url );
     request.setRequestHeader("Content-Type", "application/json")
@@ -27,7 +27,18 @@ TotalView.prototype = {
     this.clear();
 
     var totalSpace = document.getElementById( "total-space" );
+
+    var totalText = document.createElement( "h3" );
+    totalText.innerText = "Your cash";
+
+
     var totals = document.createElement( "ul" );
+    totalSpace.appendChild( totalText );
+    totalSpace.appendChild( totals );
+
+    for ( var i = 0; i < this.transactions.length; i++ ) {
+
+    }
   },
 
   clear: function() {

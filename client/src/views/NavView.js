@@ -35,7 +35,7 @@ NavView.prototype = {
     totals.onclick = function() {
       this.clear();
       var totalView = new TotalView();
-    };
+    }.bind( this );
 
     var graphs = document.createElement( "h5" );
     graphs.innerText = "graphs";
