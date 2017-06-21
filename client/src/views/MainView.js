@@ -12,7 +12,7 @@ MainView.prototype = {
     transText.innerText = "Transaction: ";
 
     var transBox = document.createElement( "input" );
-    transBox.placeHolder = "Please enter transaction description...";
+    transBox.placeHolder = "Transaction description...";
     transBox.id = "tranBoxID";
 
     var amount = document.createElement( "input" );
@@ -26,7 +26,22 @@ MainView.prototype = {
     transType.type = "checkbox";
     transType.id = "transTypeID";
 
-     
+    var typeText = document.createElement( "p" );
+    typeText.innerText = "😫";
+
+    if( transType.checked ) {
+      typeText.innerText = "😫"
+    } else {
+      typeText.innerText = "😁"
+    };
+
+    var transButton = document.createElement( "button" );
+    transButton.innerText = "Add transaction";
+    transButton.onclick = function() {
+      console.log( "Hello Again" );
+    };
+
+    mainSpace.appendChild( transText );
 
 
   },
