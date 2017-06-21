@@ -112,6 +112,7 @@
 	    var navText = document.createElement( "h5" );
 	    navText.innerText = "Home";
 	    navText.onclick = function() {
+	      this.clear();
 	      this.displayHome();
 	    }.bind( this );
 	
@@ -216,7 +217,10 @@
 	  },
 	
 	  clear: function() {
-	    
+	    var tranSpace = document.getElementById( "trans-space" );
+	    while( tranSpace.hasChildNodes() ) {
+	      tranSpace.removeChild( tranSpace.lastChild );
+	    }
 	  }
 	
 	
