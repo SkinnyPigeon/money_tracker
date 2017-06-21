@@ -1,7 +1,7 @@
 var NavView = require( './NavView' );
 var TotalView = require( './TotalView' );
 
-var TransView = function(){
+function TransView() {
   this.display();
   this.url = "http://localhost:5000/trans";
 };
@@ -9,7 +9,7 @@ var TransView = function(){
 TransView.prototype = {
 
   display: function() {
-
+    this.clear();
     var tranSpace = document.getElementById( "trans-space" );
 
     var navText = document.createElement( "h5" );
@@ -114,7 +114,12 @@ TransView.prototype = {
   },
 
   displayHome: function() {
-    var navView = new NavView();
+    var navView = document.getElementById( "nav-space" );
+    navView.style.display = "block";
+  },
+
+  clear: function() {
+    
   }
 
 

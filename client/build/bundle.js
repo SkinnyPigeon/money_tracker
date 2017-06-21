@@ -98,7 +98,7 @@
 	var NavView = __webpack_require__( 4 );
 	var TotalView = __webpack_require__( 2 );
 	
-	var TransView = function(){
+	function TransView() {
 	  this.display();
 	  this.url = "http://localhost:5000/trans";
 	};
@@ -106,7 +106,7 @@
 	TransView.prototype = {
 	
 	  display: function() {
-	
+	    this.clear();
 	    var tranSpace = document.getElementById( "trans-space" );
 	
 	    var navText = document.createElement( "h5" );
@@ -211,7 +211,12 @@
 	  },
 	
 	  displayHome: function() {
-	    var navView = new NavView();
+	    var navView = document.getElementById( "nav-space" );
+	    navView.style.display = "block";
+	  },
+	
+	  clear: function() {
+	    
 	  }
 	
 	
@@ -225,7 +230,7 @@
 
 	var TransView = __webpack_require__( 3 );
 	
-	var NavView = function() {
+	function NavView() {
 	  this.clear();
 	  this.display();
 	};
@@ -238,22 +243,25 @@
 	    var warnSpace = document.getElementById( "warn-space" );
 	    var transactionSpace = document.getElementById( "transaction-space" );
 	
-	    navSpace.innerText = "";
-	    tranSpace.innerText = "";
-	    warnSpace.innerText = "";
-	    transactionSpace.innerText = "";
+	    navSpace.style.display = "none";
+	    tranSpace.style.display = "none";
+	    warnSpace.style.display = "none";
+	    transactionSpace.style.display = "none";
 	
 	  },
 	
 	  display: function() {
 	
 	    var navSpace = document.getElementById( "nav-space" );
+	    navSpace.style.display = "block";
 	
 	    var transactions = document.createElement( "h5" );
 	    transactions.innerText = "transactions";
 	    transactions.onclick = function() {
 	      this.clear();
 	      var transView = new TransView();
+	      var tranSpace = document.getElementById( "trans-space" );
+	      tranSpace.style.display = "block";
 	    }.bind( this );
 	
 	    var totals = document.createElement( "h5" );
