@@ -56,8 +56,10 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var TotalView = __webpack_require__( 2 );
+	
 	var MainView = function(){
 	  this.start();
 	  this.url = "http://localhost:5000/trans";
@@ -127,7 +129,7 @@
 	      request.open( 'POST', this.url );
 	      request.setRequestHeader("Content-Type", "application/json");
 	      request.onload = () => {
-	        // console.log( tran );
+	        this.display();
 	      }
 	      var data = {
 	        tran: {
@@ -138,11 +140,47 @@
 	      }
 	      request.send( JSON.stringify( data ));
 	      console.log( data.transaction );
+	  },
+	
+	  display: function() {
+	    var view = new TotalView();
 	  }
 	
 	};
 	
 	module.exports = MainView;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	var TotalView = function() {
+	  this.url = "http://localhost:5000/trans";
+	  this.transactions = [];
+	  this.getTransactions();
+	};
+	
+	TotalView.prototype = {
+	  getTransactions: function() {
+	    var transactionSpace = document.getElementById( 'transaction-space' );
+	    transactionSpace.innerText = "";
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.url );
+	    request.setRequestHeader("Content-Type", "application/json")
+	
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var transactions = JSON.parse( request.responseText );
+	        this.transactions = transactions;
+	        // this.display();
+	        console.log( transactions );
+	      }
+	    }
+	    request.send( null );
+	  },
+	};
+	
+	module.exports = TotalView;
 
 /***/ }
 /******/ ]);

@@ -1,3 +1,5 @@
+var TotalView = require( './TotalView' );
+
 var MainView = function(){
   this.start();
   this.url = "http://localhost:5000/trans";
@@ -67,7 +69,7 @@ MainView.prototype = {
       request.open( 'POST', this.url );
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = () => {
-        // console.log( tran );
+        this.display();
       }
       var data = {
         tran: {
@@ -78,6 +80,10 @@ MainView.prototype = {
       }
       request.send( JSON.stringify( data ));
       console.log( data.transaction );
+  },
+
+  display: function() {
+    var view = new TotalView();
   }
 
 };
