@@ -1,9 +1,10 @@
-var TransView = require( './views/TransView' );
+// var TransView = require( './views/TransView' );
+var NavView = require( './views/NavView' );
 
 window.onload = function() {
-  trans();
+  nav();
 };
 
-var trans = function(){
-  var transView = new TransView();
+var nav = function(){
+  var navView = new NavView();
 };
