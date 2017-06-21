@@ -3,6 +3,8 @@ var TotalView = function() {
   this.transactions = [];
   this.getTransactions();
   this.total = 0;
+  this.debit = 0;
+  this.credit = 0;
 };
 
 TotalView.prototype = {
@@ -70,11 +72,15 @@ TotalView.prototype = {
         amountText.style.color = "red";
         this.total -= 
           parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        this.debit -= 
+          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
       } else {
         amountText.innerText = 
           parseFloat(Math.round(amount * 100) / 100).toFixed(2);
         amountText.style.color = "black";
         this.total += 
+          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        this.credit += 
           parseFloat(Math.round(amount * 100) / 100).toFixed(2);
       }
 

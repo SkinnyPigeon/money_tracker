@@ -1,9 +1,15 @@
 var TransView = require( './TransView' );
 var TotalView = require( './TotalView' );
+var GraphView = require( './GraphView' );
 
 function NavView() {
+  this.url = "http://localhost:5000/trans";
   this.clear();
+  this.getTransactions();
   this.display();
+  this.transactions = [];
+  this.debit = 0;
+  this.credit = 0;
 };
 
 NavView.prototype = {
@@ -40,12 +46,39 @@ NavView.prototype = {
     var graphs = document.createElement( "h5" );
     graphs.innerText = "graphs";
     graphs.onclick = function() {
-      console.log( "graphs" );
-    };
+      this.clear();
+      this.checkTotals();
+      var graphView = new GraphView( this.debit, this.credit );
+    }.bind( this );
 
     navSpace.appendChild( transactions );
     navSpace.appendChild( totals );
     navSpace.appendChild( graphs );
+  },
+
+  getTransactions: function() {
+    var request = new XMLHttpRequest();
+    request.open( 'GET', this.url );
+    request.setRequestHeader("Content-Type", "application/json")
+
+    request.onload = () => {
+      if( request.status === 200 ) {
+        var transactions = JSON.parse( request.responseText );
+        this.transactions = transactions;
+        this.checkTotals();
+      }
+    }
+    request.send( null );
+  },
+
+  checkTotals: function() {
+    for( var i = 0; i < this.transactions.length; i++ ) {
+      if( this.transactions[i].debit ) {
+        this.debit -= this.transactions[i].amount;
+      } else {
+        this.credit += this.transactions[i].amount;
+      }
+    }
   },
 };
 
