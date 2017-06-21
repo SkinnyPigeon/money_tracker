@@ -124,6 +124,10 @@ TransView.prototype = {
     while( tranSpace.hasChildNodes() ) {
       tranSpace.removeChild( tranSpace.lastChild );
     }
+    var warnSpace = document.getElementById( "warn-space" );
+    while( warnSpace.hasChildNodes() ) {
+      warnSpace.removeChild( warnSpace.lastChild );
+    }
   }
 
 

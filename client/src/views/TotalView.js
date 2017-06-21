@@ -37,8 +37,24 @@ TotalView.prototype = {
     totalSpace.appendChild( totals );
 
     for ( var i = 0; i < this.transactions.length; i++ ) {
+      var list = document.createElement( "ul" );
 
+      var transaction = document.createElement( "p" );
+      transaction.innerText = this.transactions[i].description;
+
+      var amountText = document.createElement( "p" );
+      var amount = this.transactions[i].amount;
+      if( this.transactions[i].debit ) {
+        amountText.innerText = amount;
+        amountText.style.color = "black";
+      } else {
+        amountText.innerText = "-" + amount;
+        amountText.style.color = "red";
+      }
+      totals.appendChild( transaction );
+      totals.appendChild( amountText );
     }
+
   },
 
   clear: function() {
