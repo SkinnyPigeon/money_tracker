@@ -45,6 +45,7 @@ GraphView.prototype = {
         xAxis: {
             type: 'datetime',
             categories: [ 'Time' ],
+            minTickInterval: 24 * 3600 * 1000,
             dateTimeLabelFormats: {
                 second: '%H:%M:%S',
                 minute: '%H:%M',
@@ -54,7 +55,9 @@ GraphView.prototype = {
                 month: '%b \'%y',
                 year: '%Y'
             },
-            tickInterval: 3600000 * 24
+            labels: {
+                format: '{value:%d-%m-%Y}'
+            }
         },
         yAxis: {
 
