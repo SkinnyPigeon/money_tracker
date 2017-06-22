@@ -44,7 +44,11 @@ GraphView.prototype = {
         },
         xAxis: {
             type: 'datetime',
-            categories: [ 'Time' ]
+            categories: [ 'Time' ],
+            dateTimeLabelFormats: {
+                        month: '%e. %b',
+                        year: '%b'
+                    },
         },
         yAxis: {
 
@@ -57,21 +61,41 @@ GraphView.prototype = {
             }
         },
         series: [{
-            data: this.time 
+            data:  [ this.time ] 
         }]
     });
   },
 
   makePlotPoints: function() {
     for( var i = 0; i < this.transactions.length; i++ ) {
-        this.time.push( this.makeUTC( this.transactions[i] ))
+        this.time.push( this.makeUTC( this.transactions[i].created_at ));
+        this.total.push( this.makeTotal( this.transactions[i] ));
     }
-    console.log( this.time )
-  this.display();
+    console.log( this.time );
+    this.display();
   },
 
-  makeUTC: function(  ) {
+  makeUTC: function( weirdTimeStamp ) {
+    var year = weirdTimeStamp.substr( 0, 4 );
+    year = parseInt( year );
+    var month = weirdTimeStamp.substr( 5, 2 );
+    month = parseInt( month );
+    month  -= 1;
+    var day = weirdTimeStamp.substr( 8, 2 ); 
+    day = parseInt( day );
 
+    var hour = weirdTimeStamp.substr( 11, 2 );
+    hour = parseInt( hour );
+    var minute = weirdTimeStamp.substr( 14, 2 );
+    minute = parseInt( minute );
+    var second = weirdTimeStamp.substr( 17, 2 );
+    second = parseInt( second );
+
+    return Date.UTC( year, month, day, hour, minute, second );
+  },
+
+  makeTotal: function( transaction ) {
+    if( transaction.debit )
   }
 }
 
