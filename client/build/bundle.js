@@ -420,7 +420,6 @@
 	function GraphView( debit, credit ) {
 	  this.debit = debit;
 	  this.credit = credit;
-	  console.log( this.debit );
 	  this.display();
 	}
 	
@@ -438,13 +437,20 @@
 	        },
 	        yAxis: {
 	            title: {
-	                text: 'Totals'
-	            }
+	                text: null 
+	            },
+	            // labels: {
+	            //     enabled: false
+	            // }
 	        },
 	        series: [{
 	            data: [{ y: this.credit, color: 'green' }, { y: this.debit, color: 'red' }],
-	            label: [ 'In', 'Out' ]
-	        }]
+	            label: [ 'In', 'Out' ],
+	            name: "Totals (£)"
+	        }],
+	        credits: {
+	            enabled: false
+	        }
 	    });
 	  }
 	}
