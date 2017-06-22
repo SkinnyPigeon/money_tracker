@@ -439,7 +439,7 @@
 	            text: 'Ins & Outs'
 	        },
 	        xAxis: {
-	            categories: ['In', 'Out' ]
+	            categories: ['In', 'Out', 'Remaining' ]
 	        },
 	        yAxis: {
 	            title: {
@@ -483,7 +483,7 @@
 	        },
 	        yAxis: {
 	            title: {
-	                text: 'Balance'
+	                text: 'Balance (£)'
 	            }
 	        },
 	        plotOptions: {

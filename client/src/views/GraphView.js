@@ -19,7 +19,7 @@ GraphView.prototype = {
             text: 'Ins & Outs'
         },
         xAxis: {
-            categories: ['In', 'Out' ]
+            categories: ['In', 'Out', 'Remaining' ]
         },
         yAxis: {
             title: {
@@ -63,7 +63,7 @@ GraphView.prototype = {
         },
         yAxis: {
             title: {
-                text: 'Balance'
+                text: 'Balance (£)'
             }
         },
         plotOptions: {
