@@ -3,6 +3,7 @@ var HighCharts = require( "highcharts" );
 function GraphView( debit, credit ) {
   this.debit = debit;
   this.credit = credit;
+  console.log( this.debit );
   this.display();
 }
 
@@ -13,22 +14,19 @@ GraphView.prototype = {
             type: 'bar'
         },
         title: {
-            text: 'Fruit Consumption'
+            text: 'Ins & Outs'
         },
         xAxis: {
-            categories: ['Apples', 'Bananas' ]
+            categories: ['In', 'Out' ]
         },
         yAxis: {
             title: {
-                text: 'Fruit eaten'
+                text: 'Totals'
             }
         },
         series: [{
-            name: 'Jane',
-            data: [this.debit, this.credit]
-        }, {
-            name: 'John',
-            data: [this.debit, this.credit]
+            data: [{ y: this.credit, color: 'green' }, { y: this.debit, color: 'red' }],
+            label: [ 'In', 'Out' ]
         }]
     });
   }

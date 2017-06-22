@@ -72,9 +72,11 @@ NavView.prototype = {
   },
 
   checkTotals: function() {
+    this.debit = 0;
+    this.credit = 0;
     for( var i = 0; i < this.transactions.length; i++ ) {
       if( this.transactions[i].debit ) {
-        this.debit -= this.transactions[i].amount;
+        this.debit += this.transactions[i].amount;
       } else {
         this.credit += this.transactions[i].amount;
       }

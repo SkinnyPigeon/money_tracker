@@ -132,9 +132,11 @@
 	  },
 	
 	  checkTotals: function() {
+	    this.debit = 0;
+	    this.credit = 0;
 	    for( var i = 0; i < this.transactions.length; i++ ) {
 	      if( this.transactions[i].debit ) {
-	        this.debit -= this.transactions[i].amount;
+	        this.debit += this.transactions[i].amount;
 	      } else {
 	        this.credit += this.transactions[i].amount;
 	      }
@@ -363,8 +365,9 @@
 	        amountText.style.color = "red";
 	        this.total -= 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	        this.debit -= 
+	        this.debit += 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	          console.log( this.debit );
 	      } else {
 	        amountText.innerText = 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
@@ -417,6 +420,7 @@
 	function GraphView( debit, credit ) {
 	  this.debit = debit;
 	  this.credit = credit;
+	  console.log( this.debit );
 	  this.display();
 	}
 	
@@ -427,22 +431,19 @@
 	            type: 'bar'
 	        },
 	        title: {
-	            text: 'Fruit Consumption'
+	            text: 'Ins & Outs'
 	        },
 	        xAxis: {
-	            categories: ['Apples', 'Bananas' ]
+	            categories: ['In', 'Out' ]
 	        },
 	        yAxis: {
 	            title: {
-	                text: 'Fruit eaten'
+	                text: 'Totals'
 	            }
 	        },
 	        series: [{
-	            name: 'Jane',
-	            data: [this.debit, this.credit]
-	        }, {
-	            name: 'John',
-	            data: [this.debit, this.credit]
+	            data: [{ y: this.credit, color: 'green' }, { y: this.debit, color: 'red' }],
+	            label: [ 'In', 'Out' ]
 	        }]
 	    });
 	  }

@@ -72,8 +72,9 @@ TotalView.prototype = {
         amountText.style.color = "red";
         this.total -= 
           parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-        this.debit -= 
+        this.debit += 
           parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+          console.log( this.debit );
       } else {
         amountText.innerText = 
           parseFloat(Math.round(amount * 100) / 100).toFixed(2);
