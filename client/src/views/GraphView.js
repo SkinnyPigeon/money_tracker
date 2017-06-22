@@ -60,7 +60,9 @@ GraphView.prototype = {
             }
         },
         yAxis: {
-
+            title: {
+                text: 'Balance'
+            }
         },
         plotOptions: {
             spline: {
@@ -79,15 +81,16 @@ GraphView.prototype = {
                     ]);
                 }
                 return data;
-            }.bind( this )())
-            // pointInterval: 1000 * 60 * 60
+            }.bind( this )()),
+            name: "Life =>"
         }],
         tooltip: {
             xDateFormat: "%d-%m-%Y",
             valuePrefix: "£"
         },
-
-
+        credits: {
+            enabled: false
+        }
     });
   },
 

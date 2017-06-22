@@ -63,7 +63,8 @@
 	var GraphView = __webpack_require__( 4 );
 	
 	function NavView() {
-	  this.url = "http://localhost:5000/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.clear();
 	  this.getTransactions();
 	  this.display();
@@ -155,7 +156,8 @@
 	
 	function TransView() {
 	  this.display();
-	  this.url = "http://localhost:5000/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	};
 	
 	TransView.prototype = {
@@ -292,7 +294,8 @@
 /***/ function(module, exports) {
 
 	var TotalView = function() {
-	  this.url = "http://localhost:5000/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.transactions = [];
 	  this.getTransactions();
 	  this.total = 0;
@@ -477,7 +480,9 @@
 	            }
 	        },
 	        yAxis: {
-	
+	            title: {
+	                text: 'Balance'
+	            }
 	        },
 	        plotOptions: {
 	            spline: {
@@ -496,15 +501,16 @@
 	                    ]);
 	                }
 	                return data;
-	            }.bind( this )())
-	            // pointInterval: 1000 * 60 * 60
+	            }.bind( this )()),
+	            name: "Life =>"
 	        }],
 	        tooltip: {
 	            xDateFormat: "%d-%m-%Y",
 	            valuePrefix: "£"
 	        },
-	
-	
+	        credits: {
+	            enabled: false
+	        }
 	    });
 	  },
 	
