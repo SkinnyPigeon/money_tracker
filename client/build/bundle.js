@@ -447,8 +447,10 @@
 	            }
 	        },
 	        series: [{
-	            data: [{ y: this.credit, color: 'green' }, { y: this.debit, color: 'red' }],
-	            label: [ 'In', 'Out' ],
+	            data: [{ y: this.credit, color: 'green' },
+	                     { y: this.debit, color: 'red' },
+	                     { y: this.total[ this.total.length - 1 ], color: 'blue' }],
+	            label: [ 'In', 'Out', 'Remaining' ],
 	            name: "Totals (£)"
 	        }],
 	        credits: {
