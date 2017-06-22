@@ -1,14 +1,17 @@
 var HighCharts = require( "highcharts" );
 
-function GraphView( debit, credit ) {
+function GraphView( debit, credit, transactions ) {
   this.debit = debit;
   this.credit = credit;
-  this.display();
+  this.transactions = transactions;
+  this.time = [];
+  this.total = [];
+  this.makePlotPoints();
 }
 
 GraphView.prototype = {
   display: function() {
-    var myChart = HighCharts.chart('graph-space', {
+    var myChart = HighCharts.chart('bar-space', {
         chart: {
             type: 'bar'
         },
@@ -21,10 +24,7 @@ GraphView.prototype = {
         yAxis: {
             title: {
                 text: null 
-            },
-            // labels: {
-            //     enabled: false
-            // }
+            }
         },
         series: [{
             data: [{ y: this.credit, color: 'green' }, { y: this.debit, color: 'red' }],
@@ -34,7 +34,44 @@ GraphView.prototype = {
         credits: {
             enabled: false
         }
+    })
+    var lineChart = HighCharts.chart( 'line-space', {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Cash Flow'
+        },
+        xAxis: {
+            type: 'datetime',
+            categories: [ 'Time' ]
+        },
+        yAxis: {
+
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            data: this.time 
+        }]
     });
+  },
+
+  makePlotPoints: function() {
+    for( var i = 0; i < this.transactions.length; i++ ) {
+        this.time.push( this.makeUTC( this.transactions[i] ))
+    }
+    console.log( this.time )
+  this.display();
+  },
+
+  makeUTC: function(  ) {
+
   }
 }
 

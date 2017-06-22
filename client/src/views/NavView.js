@@ -48,7 +48,7 @@ NavView.prototype = {
     graphs.onclick = function() {
       this.clear();
       this.checkTotals();
-      var graphView = new GraphView( this.debit, this.credit );
+      var graphView = new GraphView( this.debit, this.credit, this.transactions );
     }.bind( this );
 
     navSpace.appendChild( transactions );
