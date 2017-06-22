@@ -54,7 +54,7 @@ GraphView.prototype = {
                 month: '%b \'%y',
                 year: '%Y'
             },
-            tickInterval: 3600000 * 24 * 7
+            tickInterval: 3600000 * 24
         },
         yAxis: {
 
@@ -76,9 +76,13 @@ GraphView.prototype = {
                     ]);
                 }
                 return data;
-            }.bind( this )()),
-            pointInterval: 1000 * 60 * 60
-        }]
+            }.bind( this )())
+            // pointInterval: 1000 * 60 * 60
+        }],
+        tooltip: {
+            xDateFormat: "%d-%m-%Y",
+            valuePrefix: "£"
+        },
 
 
     });
