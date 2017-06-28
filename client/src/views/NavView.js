@@ -3,8 +3,8 @@ var TotalView = require( './TotalView' );
 var GraphView = require( './GraphView' );
 
 function NavView() {
-  this.url = "http://localhost:5000/trans";
-  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+  // this.url = "http://localhost:5000/trans";
+  this.url = "https://money-tracker-test.herokuapp.com/trans";
   this.clear();
   this.getTransactions();
   this.display();
@@ -114,6 +114,18 @@ NavView.prototype = {
 
     navSpace.style.display = "block";
     totSpace.style.display = "block";
+  },
+
+  showGraphs: function() {
+    this.clear();
+
+    var navSpace = document.getElementById( "nav-space" );
+    var barSpace = document.getElementById( "bar-space" );
+    var lineSpace = document.getElementById( "line-space" );
+
+    navSpace.style.display = "block";
+    barSpace.style.display = "block";
+    lineSpace.style.display = "block";
   },
 };
 

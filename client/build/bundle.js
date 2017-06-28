@@ -63,8 +63,8 @@
 	var GraphView = __webpack_require__( 4 );
 	
 	function NavView() {
-	  this.url = "http://localhost:5000/trans";
-	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.clear();
 	  this.getTransactions();
 	  this.display();
@@ -175,6 +175,18 @@
 	    navSpace.style.display = "block";
 	    totSpace.style.display = "block";
 	  },
+	
+	  showGraphs: function() {
+	    this.clear();
+	
+	    var navSpace = document.getElementById( "nav-space" );
+	    var barSpace = document.getElementById( "bar-space" );
+	    var lineSpace = document.getElementById( "line-space" );
+	
+	    navSpace.style.display = "block";
+	    barSpace.style.display = "block";
+	    lineSpace.style.display = "block";
+	  },
 	};
 	
 	module.exports = NavView;
@@ -188,8 +200,8 @@
 	
 	function TransView() {
 	  this.display();
-	  this.url = "http://localhost:5000/trans";
-	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	};
 	
 	TransView.prototype = {
@@ -318,8 +330,8 @@
 /***/ function(module, exports) {
 
 	var TotalView = function() {
-	  this.url = "http://localhost:5000/trans";
-	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.transactions = [];
 	  this.getTransactions();
 	  this.total = 0;
@@ -532,7 +544,7 @@
 	                var data = []
 	                for ( var i = 0; i < this.time.length; i++ ) {
 	                    data.push([
-	                        this.time[i], this.total[i]
+	                        this.time[i], this.total[i].toFixed(2)
 	                    ]);
 	                }
 	                return data;
@@ -579,9 +591,9 @@
 	
 	  makeTotal: function( transaction, index ) {
 	    if( transaction.debit ) {
-	        this.total[ index ] -= transaction.amount
+	        this.total[ index ] -= transaction.amount.toFixed(2)
 	    } else {
-	        this.total[ index ] += transaction.amount
+	        this.total[ index ] += transaction.amount.toFixed(2)
 	    }
 	    console.log( this.total[ index ]);
 	    return this.total[ index ];

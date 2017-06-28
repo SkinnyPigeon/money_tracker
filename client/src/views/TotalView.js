@@ -1,6 +1,6 @@
 var TotalView = function() {
-  this.url = "http://localhost:5000/trans";
-  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+  // this.url = "http://localhost:5000/trans";
+  this.url = "https://money-tracker-test.herokuapp.com/trans";
   this.transactions = [];
   this.getTransactions();
   this.total = 0;
