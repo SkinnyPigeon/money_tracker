@@ -63,8 +63,8 @@
 	var GraphView = __webpack_require__( 4 );
 	
 	function NavView() {
-	  // this.url = "http://localhost:5000/trans";
-	  this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  this.url = "http://localhost:5000/trans";
+	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.clear();
 	  this.getTransactions();
 	  this.display();
@@ -156,8 +156,8 @@
 	
 	function TransView() {
 	  this.display();
-	  // this.url = "http://localhost:5000/trans";
-	  this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  this.url = "http://localhost:5000/trans";
+	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
 	};
 	
 	TransView.prototype = {
@@ -294,8 +294,8 @@
 /***/ function(module, exports) {
 
 	var TotalView = function() {
-	  // this.url = "http://localhost:5000/trans";
-	  this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  this.url = "http://localhost:5000/trans";
+	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.transactions = [];
 	  this.getTransactions();
 	  this.total = 0;
@@ -353,6 +353,9 @@
 	
 	    for ( var i = 0; i < this.transactions.length; i++ ) {
 	
+	      this.makeTotal( this.transactions[i], i )
+	
+	
 	      var textList = document.createElement( "ul" );
 	      var totalList = document.createElement( "ul" );
 	
@@ -366,8 +369,8 @@
 	        amountText.innerText = "-" + 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	        amountText.style.color = "red";
-	        this.total -= 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        // this.total -= 
+	          // parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	        this.debit += 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	          console.log( this.debit );
@@ -375,11 +378,12 @@
 	        amountText.innerText = 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	        amountText.style.color = "black";
-	        this.total += 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        // this.total += 
+	          // parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	        this.credit += 
 	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
 	      }
+	
 	
 	      textList.appendChild( transaction );
 	      totalList.appendChild( amountText );
@@ -388,11 +392,14 @@
 	    }
 	
 	    var grandTotal = document.createElement( "h2" );
+	
+	
 	    if ( this.total < 0 ) {
 	      grandTotal.style.color = "red";
 	    } else {
 	      grandTotal.style.color = "black";
 	    }
+	
 	    grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
 	
 	    totalSpace.appendChild( grandTotal );
@@ -410,6 +417,16 @@
 	    var navView = document.getElementById( "nav-space" );
 	    navView.style.display = "block";
 	  },
+	
+	  makeTotal: function( transaction, index ) {
+	    if( transaction.debit ) {
+	        this.total -= transaction.amount
+	    } else {
+	        this.total += transaction.amount
+	    }
+	  //   console.log( this.total[ index ]);
+	  //   return this.total[ index ];
+	  }
 	};
 	
 	module.exports = TotalView;
