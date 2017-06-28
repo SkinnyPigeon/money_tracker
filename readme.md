@@ -116,6 +116,71 @@ config.middleware.insert_before 0, "Rack::Cors" do
 end
 ```
 
+**ADDING THE CONTROLLERS FOR THE TRANSACTIONS**
+
+Almost there. Just need to create the controllers that'll let us use the routes we created earlier.
+
+`$ cd app/controllers`
+`$ touch trans_controller.rb`
+
+Open up this file then paste the following in:
+
+```ruby
+class ClientsController < ApplicationController
+
+  def index
+    clients = Client.all()
+    render :json => clients.to_json()
+  end
+
+  def create
+    client = Client.create!( client_params )
+    client.save()
+    clients = Client.all()
+    render :json => clients.to_json()
+  end
+
+  private
+  def client_params
+    params.require(:client).permit([ :name, :email, :number ])
+  end
+
+end
+```
+
+**ADD A SEED TO CHECK IT ALL WORKS**
+
+Before the final step we are going to double check that PostgreSQL is running and RackCors is turned on in Chrome ( I always forget these ).
+
+Open up db/seeds.rb and replace everything there with:
+
+```ruby
+Tran.destroy_all
+
+Tran.create!( description:"Pay day!!!", amount:1533.29, debit:false )
+```
+
+`$ rake db:seed`
+`$ rails s -p 5000`
+
+
+Navigate to http://localhost:5000/ in your browser.
+
+Hopfully you should see the seed we just created.
+
+**RUN OUR WEBAPP**
+
+Navigate to http://localhost:3000/ in your browser if you haven't already, refresh if you have.
+
+Hopefully now when you click on Totals and Graphs you should see your seeded data already there. Now all you need to do is add your own transactions. If you want to start with no seeded data then simply change the db/seed.rb file to:
+
+```ruby
+Tran.destroy_all
+```
+
+`$ rake db:seed`
+
+Enjoy 😁
 
 
 
