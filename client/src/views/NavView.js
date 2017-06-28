@@ -3,8 +3,8 @@ var TotalView = require( './TotalView' );
 var GraphView = require( './GraphView' );
 
 function NavView() {
-  this.url = "http://localhost:5000/trans";
-  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+  // this.url = "http://localhost:5000/trans";
+  this.url = "https://money-tracker-test.herokuapp.com/trans";
   this.clear();
   this.getTransactions();
   this.display();

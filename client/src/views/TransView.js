@@ -1,7 +1,7 @@
 function TransView() {
   this.display();
-  this.url = "http://localhost:5000/trans";
-  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+  // this.url = "http://localhost:5000/trans";
+  this.url = "https://money-tracker-test.herokuapp.com/trans";
 };
 
 TransView.prototype = {

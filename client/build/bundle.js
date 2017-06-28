@@ -63,8 +63,8 @@
 	var GraphView = __webpack_require__( 4 );
 	
 	function NavView() {
-	  this.url = "http://localhost:5000/trans";
-	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.clear();
 	  this.getTransactions();
 	  this.display();
@@ -197,8 +197,8 @@
 
 	function TransView() {
 	  this.display();
-	  this.url = "http://localhost:5000/trans";
-	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	};
 	
 	TransView.prototype = {
@@ -314,8 +314,8 @@
 /***/ function(module, exports) {
 
 	var TotalView = function( transactions ) {
-	  this.url = "http://localhost:5000/trans";
-	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  // this.url = "http://localhost:5000/trans";
+	  this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.transactions = transactions;
 	  this.display();
 	  this.total = 0;
@@ -324,22 +324,6 @@
 	};
 	
 	TotalView.prototype = {
-	
-	  getTransactions: function() {
-	    var totalSpace = document.getElementById( 'total-space' );
-	    totalSpace.innerText = "";
-	    var request = new XMLHttpRequest();
-	    request.open( 'GET', this.url );
-	    request.setRequestHeader("Content-Type", "application/json")
-	
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var transactions = JSON.parse( request.responseText );
-	        this.transactions = transactions;
-	      }
-	    }
-	    request.send( null );
-	  },
 	
 	  display: function() {
 	    this.clear();
@@ -427,8 +411,8 @@
 	var HighCharts = __webpack_require__( 5 );
 	
 	function GraphView( debit, credit, transactions ) {
-	  this.debit = debit;
-	  this.credit = credit;
+	  this.debit = Math.round( debit * 100 ) / 100;
+	  this.credit = Math.round( credit * 100 ) / 100;
 	  this.transactions = transactions;
 	  this.time = [];
 	  this.total = [0];

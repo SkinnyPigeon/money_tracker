@@ -1,6 +1,6 @@
 var TotalView = function( transactions ) {
-  this.url = "http://localhost:5000/trans";
-  // this.url = "https://money-tracker-test.herokuapp.com/trans";
+  // this.url = "http://localhost:5000/trans";
+  this.url = "https://money-tracker-test.herokuapp.com/trans";
   this.transactions = transactions;
   this.display();
   this.total = 0;
@@ -9,22 +9,6 @@ var TotalView = function( transactions ) {
 };
 
 TotalView.prototype = {
-
-  getTransactions: function() {
-    var totalSpace = document.getElementById( 'total-space' );
-    totalSpace.innerText = "";
-    var request = new XMLHttpRequest();
-    request.open( 'GET', this.url );
-    request.setRequestHeader("Content-Type", "application/json")
-
-    request.onload = () => {
-      if( request.status === 200 ) {
-        var transactions = JSON.parse( request.responseText );
-        this.transactions = transactions;
-      }
-    }
-    request.send( null );
-  },
 
   display: function() {
     this.clear();

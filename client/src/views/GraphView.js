@@ -1,8 +1,8 @@
 var HighCharts = require( "highcharts" );
 
 function GraphView( debit, credit, transactions ) {
-  this.debit = debit;
-  this.credit = credit;
+  this.debit = Math.round( debit * 100 ) / 100;
+  this.credit = Math.round( credit * 100 ) / 100;
   this.transactions = transactions;
   this.time = [];
   this.total = [0];
