@@ -17,7 +17,7 @@ You should now be on the main page of the application.
 
 Next comes the hard bit...
 
-**SETTING UP THE RAILS**
+**SETTING UP RAILS**
 
 You'll need Ruby on Rails, PostgreSQL, RackCORS and Bundler installed globally:
 
