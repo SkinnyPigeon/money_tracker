@@ -32,15 +32,7 @@ TotalView.prototype = {
     this.clear();
     this.total = 0;
 
-    var navText = document.createElement( "h5" );
-    navText.innerText = "Home";
-    navText.onclick = function() {
-      this.clear();
-      this.displayHome();
-    }.bind( this );
-
     var totalSpace = document.getElementById( "total-space" );
-    totalSpace.appendChild( navText );
 
     var totalText = document.createElement( "h3" );
     totalText.innerText = "Your cash";

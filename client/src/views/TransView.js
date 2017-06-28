@@ -13,13 +13,6 @@ TransView.prototype = {
     this.clear();
     var tranSpace = document.getElementById( "trans-space" );
 
-    var navText = document.createElement( "h5" );
-    navText.innerText = "Home";
-    navText.onclick = function() {
-      this.clear();
-      this.displayHome();
-    }.bind( this );
-
     var transText = document.createElement( "p" );
     transText.innerText = "Transaction: ";
 
@@ -60,7 +53,6 @@ TransView.prototype = {
       this.addTransaction( transBox.value, transAmount.value, transType.checked );
     }.bind( this );
 
-    tranSpace.appendChild( navText );
     tranSpace.appendChild( transText );
     tranSpace.appendChild( transBox );
     tranSpace.appendChild( transAmount );

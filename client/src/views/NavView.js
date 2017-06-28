@@ -34,6 +34,9 @@ NavView.prototype = {
     var navSpace = document.getElementById( "nav-space" );
     navSpace.style.display = "block";
 
+    var tranSpace = document.getElementById( "trans-space" );
+    tranSpace.style.display = "block";
+
     var navBar = document.createElement( "ul" );
     var transactions = document.createElement( "li" );
     transactions.innerText = "transactions";
@@ -91,6 +94,26 @@ NavView.prototype = {
         this.credit += this.transactions[i].amount;
       }
     }
+  },
+
+  showTrans: function() {
+    this.clear();
+
+    var navSpace = document.getElementById( "nav-space" );
+    var tranSpace = document.getElementById( "trans-space" );
+
+    navSpace.style.display = "block";
+    tranSpace.style.display = "block";
+  },
+
+  showTotals: function() {
+    this.clear();
+
+    var navSpace = document.getElementById( "nav-space" );
+    var totSpace = document.getElementById( "total-space" );
+
+    navSpace.style.display = "block";
+    totSpace.style.display = "block";
   },
 };
 

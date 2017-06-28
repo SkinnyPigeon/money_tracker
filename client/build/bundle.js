@@ -94,6 +94,9 @@
 	    var navSpace = document.getElementById( "nav-space" );
 	    navSpace.style.display = "block";
 	
+	    var tranSpace = document.getElementById( "trans-space" );
+	    tranSpace.style.display = "block";
+	
 	    var navBar = document.createElement( "ul" );
 	    var transactions = document.createElement( "li" );
 	    transactions.innerText = "transactions";
@@ -152,6 +155,26 @@
 	      }
 	    }
 	  },
+	
+	  showTrans: function() {
+	    this.clear();
+	
+	    var navSpace = document.getElementById( "nav-space" );
+	    var tranSpace = document.getElementById( "trans-space" );
+	
+	    navSpace.style.display = "block";
+	    tranSpace.style.display = "block";
+	  },
+	
+	  showTotals: function() {
+	    this.clear();
+	
+	    var navSpace = document.getElementById( "nav-space" );
+	    var totSpace = document.getElementById( "total-space" );
+	
+	    navSpace.style.display = "block";
+	    totSpace.style.display = "block";
+	  },
 	};
 	
 	module.exports = NavView;
@@ -174,13 +197,6 @@
 	  display: function() {
 	    this.clear();
 	    var tranSpace = document.getElementById( "trans-space" );
-	
-	    var navText = document.createElement( "h5" );
-	    navText.innerText = "Home";
-	    navText.onclick = function() {
-	      this.clear();
-	      this.displayHome();
-	    }.bind( this );
 	
 	    var transText = document.createElement( "p" );
 	    transText.innerText = "Transaction: ";
@@ -222,7 +238,6 @@
 	      this.addTransaction( transBox.value, transAmount.value, transType.checked );
 	    }.bind( this );
 	
-	    tranSpace.appendChild( navText );
 	    tranSpace.appendChild( transText );
 	    tranSpace.appendChild( transBox );
 	    tranSpace.appendChild( transAmount );
@@ -336,15 +351,7 @@
 	    this.clear();
 	    this.total = 0;
 	
-	    var navText = document.createElement( "h5" );
-	    navText.innerText = "Home";
-	    navText.onclick = function() {
-	      this.clear();
-	      this.displayHome();
-	    }.bind( this );
-	
 	    var totalSpace = document.getElementById( "total-space" );
-	    totalSpace.appendChild( navText );
 	
 	    var totalText = document.createElement( "h3" );
 	    totalText.innerText = "Your cash";
