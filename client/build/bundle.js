@@ -90,31 +90,35 @@
 	    var navSpace = document.getElementById( "nav-space" );
 	    navSpace.style.display = "block";
 	
-	    var transactions = document.createElement( "h5" );
+	    var navBar = document.createElement( "ul" );
+	    var transactions = document.createElement( "li" );
 	    transactions.innerText = "transactions";
 	    transactions.onclick = function() {
 	      this.clear();
-	      var transView = new TransView();
+	      this.showTrans();
 	    }.bind( this );
 	
-	    var totals = document.createElement( "h5" );
+	    var totals = document.createElement( "li" );
 	    totals.innerText = "totals";
 	    totals.onclick = function() {
 	      this.clear();
-	      var totalView = new TotalView();
+	      this.showTotals();
 	    }.bind( this );
 	
-	    var graphs = document.createElement( "h5" );
+	    var graphs = document.createElement( "li" );
 	    graphs.innerText = "graphs";
 	    graphs.onclick = function() {
 	      this.clear();
-	      this.checkTotals();
-	      var graphView = new GraphView( this.debit, this.credit, this.transactions );
+	      this.showGraphs();
 	    }.bind( this );
 	
-	    navSpace.appendChild( transactions );
-	    navSpace.appendChild( totals );
-	    navSpace.appendChild( graphs );
+	    navBar.appendChild( transactions );
+	    navBar.appendChild( totals );
+	    navBar.appendChild( graphs );
+	    navSpace.appendChild( navBar );
+	
+	    var transView = new TransView();
+	    var totalView = new TotalView();
 	  },
 	
 	  getTransactions: function() {
@@ -127,6 +131,7 @@
 	        var transactions = JSON.parse( request.responseText );
 	        this.transactions = transactions;
 	        this.checkTotals();
+	        var graphView = new GraphView( this.debit, this.credit, this.transactions );
 	      }
 	    }
 	    request.send( null );
