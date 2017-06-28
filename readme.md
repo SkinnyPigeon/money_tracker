@@ -160,7 +160,7 @@ Tran.destroy_all
 Tran.create!( description:"Pay day!!!", amount:1533.29, debit:false )
 ```
 
-`$ rake db:seed`
+`$ rake db:seed`  
 `$ rails s -p 5000`
 
 
