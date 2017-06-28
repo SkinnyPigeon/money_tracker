@@ -128,7 +128,6 @@ GraphView.prototype = {
         this.total[ index ] -= debit;
     } else {
         var credit = Math.round(transaction.amount * 100) / 100;
-        var debit = Math.round(transaction.amount * 100) / 100;
         this.total[ index ] += credit;
     }
     return this.total[ index ];
