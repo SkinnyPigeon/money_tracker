@@ -544,12 +544,8 @@
 	                var data = []
 	                for ( var i = 0; i < this.time.length; i++ ) {
 	                    data.push([
-	                        this.time[i], 
-	
-	                        // .toFixed(2)
-	
-	                        parseFloat(Math.round(this.total[i] * 100) / 100).toFixed(2)
-	                    ]).bind( this );
+	                        this.time[i], this.total[i]
+	                    ]);
 	                }
 	                return data;
 	            }.bind( this )()),
