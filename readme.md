@@ -86,7 +86,7 @@ Open the Procfile and add:
 web: bundle exec rails server -p $PORT
 ```
 
-Open up the config/routes and replace everything with:
+Open up the config/routes.rb and replace everything with:
 
 ```ruby
 Rails.application.routes.draw do
