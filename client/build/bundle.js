@@ -549,7 +549,7 @@
 	                        // .toFixed(2)
 	
 	                        parseFloat(Math.round(this.total[i] * 100) / 100).toFixed(2)
-	                    ]);
+	                    ]).bind( this );
 	                }
 	                return data;
 	            }.bind( this )()),
