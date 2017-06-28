@@ -21,7 +21,7 @@ Next comes the hard bit...
 
 **SETTING UP RAILS**
 
-You'll need Ruby on Rails, PostgreSQL, RackCORS and Bundler installed globally:
+You'll need [Ruby on Rails](https://www.youtube.com/watch?v=3Lp5XP8pWkU), [PostgreSQL](https://postgresapp.com/), [RackCORS](https://rubygems.org/gems/rack-cors/versions/0.4.0) and [Bundler](http://bundler.io/) installed globally:
 
 `$ rails new TestDB --database:postgresql`  
 `$ cd TestDB`  
