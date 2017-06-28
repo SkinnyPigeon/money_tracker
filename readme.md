@@ -107,7 +107,7 @@ Bundler.require(*Rails.groups)
 
 module BusDatabase
   class Application < Rails::Application
-config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, "Rack::Cors" do
         allow do
             origins '*'
             resource '*', :headers => :any, :methods => [ :get, :post, :put, :options, :delete ]
@@ -122,7 +122,7 @@ end
 
 Almost there. Just need to create the controllers that'll let us use the routes we created earlier.
 
-`$ cd app/controllers`
+`$ cd app/controllers`  
 `$ touch trans_controller.rb`
 
 Open up this file then paste the following in:
