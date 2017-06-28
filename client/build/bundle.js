@@ -78,11 +78,15 @@
 	
 	    var navSpace = document.getElementById( "nav-space" );
 	    var tranSpace = document.getElementById( "trans-space" );
-	    var warnSpace = document.getElementById( "warn-space" );
-	    var transactionSpace = document.getElementById( "transaction-space" );
+	    var totSpace = document.getElementById( "total-space" );
+	    var barSpace = document.getElementById( "bar-space" );
+	    var lineSpace = document.getElementById( "line-space" );
 	
 	    navSpace.style.display = "none";
-	
+	    tranSpace.style.display = "none";
+	    totSpace.style.display = "none";
+	    barSpace.style.display = "none";
+	    lineSpace.style.display = "none";
 	  },
 	
 	  display: function() {
