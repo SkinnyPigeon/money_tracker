@@ -76,4 +76,44 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 `$ touch Procfile`
 
+Open the Procfile and add:
+
+web: bundle exec rails server -p $PORT
+
+Open up the config/routes and replace everything with:
+
+Rails.application.routes.draw do
+root 'trans#index'
+  post 'trans' => 'trans#create', defaults: {format: :json}
+  get 'trans' => 'trans#index', defaults: {format: :json}
+end
+
+`$ rake routes`
+
+**SETTING UP THE APPLICATION AND ITS CONTROLLER**
+
+Open up the config/application.rb and replace everything with:
+
+```ruby
+require_relative 'boot'
+require 'rails/all'
+Bundler.require(*Rails.groups)
+
+module BusDatabase
+  class Application < Rails::Application
+config.middleware.insert_before 0, "Rack::Cors" do
+        allow do
+            origins '*'
+            resource '*', :headers => :any, :methods => [ :get, :post, :put, :options, :delete ]
+        end
+    end
+    config.active_record.raise_in_transactional_callbacks = true
+  end
+end
+```
+
+
+
+
+
 
