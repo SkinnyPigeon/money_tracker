@@ -31,6 +31,7 @@ You'll need Ruby on Rails, PostgreSQL, RackCORS and Bundler installed globally:
 
 Open up the gem file and replace everything with this:
 
+```ruby
 source 'https://rubygems.org'
 
 gem 'rack-cors', :require => 'rack/cors'
@@ -69,6 +70,7 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+```
 
 `$ bundle`
 
@@ -82,11 +84,13 @@ web: bundle exec rails server -p $PORT
 
 Open up the config/routes and replace everything with:
 
+```ruby
 Rails.application.routes.draw do
 root 'trans#index'
   post 'trans' => 'trans#create', defaults: {format: :json}
   get 'trans' => 'trans#index', defaults: {format: :json}
 end
+```
 
 `$ rake routes`
 
