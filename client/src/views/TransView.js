@@ -1,6 +1,3 @@
-var NavView = require( './NavView' );
-var TotalView = require( './TotalView' );
-
 function TransView() {
   this.display();
   this.url = "http://localhost:5000/trans";
@@ -63,7 +60,6 @@ TransView.prototype = {
   },
 
   addTransaction: function( description, amount, type ) {
-
       var debit = true;
       if ( type ) {
         debit = false;
@@ -85,11 +81,6 @@ TransView.prototype = {
         }
       }
       request.send( JSON.stringify( data ));
-      console.log( data.transaction );
-  },
-
-  displayTotal: function() {
-    var view = new TotalView();
   },
 
   displayWarning: function( description, amount ) {
@@ -107,11 +98,6 @@ TransView.prototype = {
     }
   },
 
-  displayHome: function() {
-    var navView = document.getElementById( "nav-space" );
-    navView.style.display = "block";
-  },
-
   clear: function() {
     var tranSpace = document.getElementById( "trans-space" );
     while( tranSpace.hasChildNodes() ) {
@@ -122,8 +108,6 @@ TransView.prototype = {
       warnSpace.removeChild( warnSpace.lastChild );
     }
   }
-
-
 };
 
 module.exports = TransView;

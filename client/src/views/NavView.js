@@ -15,7 +15,6 @@ function NavView() {
 
 NavView.prototype = {
   clear: function() {
-
     var navSpace = document.getElementById( "nav-space" );
     var tranSpace = document.getElementById( "trans-space" );
     var totSpace = document.getElementById( "total-space" );
@@ -30,7 +29,6 @@ NavView.prototype = {
   },
 
   display: function() {
-
     var navSpace = document.getElementById( "nav-space" );
     navSpace.style.display = "block";
 
@@ -49,6 +47,7 @@ NavView.prototype = {
     totals.innerText = "totals";
     totals.onclick = function() {
       this.clear();
+      this.getTransactions();
       this.showTotals();
     }.bind( this );
 
@@ -56,6 +55,7 @@ NavView.prototype = {
     graphs.innerText = "graphs";
     graphs.onclick = function() {
       this.clear();
+      this.getTransactions();
       this.showGraphs();
     }.bind( this );
 
@@ -65,7 +65,6 @@ NavView.prototype = {
     navSpace.appendChild( navBar );
 
     var transView = new TransView();
-    var totalView = new TotalView();
   },
 
   getTransactions: function() {
@@ -79,6 +78,7 @@ NavView.prototype = {
         this.transactions = transactions;
         this.checkTotals();
         var graphView = new GraphView( this.debit, this.credit, this.transactions );
+        var totalView = new TotalView( this.transactions );
       }
     }
     request.send( null );

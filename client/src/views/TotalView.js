@@ -1,8 +1,8 @@
-var TotalView = function() {
+var TotalView = function( transactions ) {
   this.url = "http://localhost:5000/trans";
   // this.url = "https://money-tracker-test.herokuapp.com/trans";
-  this.transactions = [];
-  this.getTransactions();
+  this.transactions = transactions;
+  this.display();
   this.total = 0;
   this.debit = 0;
   this.credit = 0;
@@ -21,8 +21,6 @@ TotalView.prototype = {
       if( request.status === 200 ) {
         var transactions = JSON.parse( request.responseText );
         this.transactions = transactions;
-        this.display();
-        console.log( transactions );
       }
     }
     request.send( null );
@@ -52,7 +50,6 @@ TotalView.prototype = {
 
       this.makeTotal( this.transactions[i], i )
 
-
       var textList = document.createElement( "ul" );
       var totalList = document.createElement( "ul" );
 
@@ -66,13 +63,11 @@ TotalView.prototype = {
         amountText.innerText = "-" + ( Math.round( amount * 100 ) / 100 ).toFixed(2);
         amountText.style.color = "red";
         this.debit += Math.round( amount * 100) / 100;
-          console.log( this.debit );
       } else {
         amountText.innerText = ( Math.round( amount * 100 ) / 100 ).toFixed(2);
         amountText.style.color = "black";
         this.credit += ( Math.round( amount * 100 ) / 100 );
       }
-
 
       textList.appendChild( transaction );
       totalList.appendChild( amountText );
@@ -82,7 +77,6 @@ TotalView.prototype = {
 
     var grandTotal = document.createElement( "h2" );
 
-
     if ( this.total < 0 ) {
       grandTotal.style.color = "red";
     } else {
@@ -90,9 +84,7 @@ TotalView.prototype = {
     }
 
     grandTotal.innerText = parseFloat(Math.round(this.total * 100) / 100).toFixed(2);
-
     totalSpace.appendChild( grandTotal );
-
   },
 
   clear: function() {
@@ -102,19 +94,12 @@ TotalView.prototype = {
     }
   },
 
-  displayHome: function() {
-    var navView = document.getElementById( "nav-space" );
-    navView.style.display = "block";
-  },
-
   makeTotal: function( transaction, index ) {
     if( transaction.debit ) {
         this.total -= transaction.amount
     } else {
         this.total += transaction.amount
     }
-  //   console.log( this.total[ index ]);
-  //   return this.total[ index ];
   }
 };
 

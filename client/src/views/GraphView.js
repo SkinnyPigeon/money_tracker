@@ -75,7 +75,6 @@ GraphView.prototype = {
         },
         series: [{
             data: (function () {
-                console.log( this.time )
                 var data = []
                 for ( var i = 0; i < this.time.length; i++ ) {
                     data.push([
@@ -128,14 +127,10 @@ GraphView.prototype = {
         var debit = Math.round(transaction.amount * 100) / 100;
         this.total[ index ] -= debit;
     } else {
-        console.log( transaction.amount );
         var credit = Math.round(transaction.amount * 100) / 100;
         var debit = Math.round(transaction.amount * 100) / 100;
-        console.log( credit );
-        console.log( debit );
         this.total[ index ] += credit;
     }
-    console.log( this.total[ index ]);
     return this.total[ index ];
   }
 }
