@@ -21,8 +21,8 @@ Next comes the hard bit...
 
 You'll need Ruby on Rails, PostgreSQL and RackCORS installed globally:
 
-`$ rails new TestDB --database:postgresql`
-`$ cd TestDB`
-`$ rails g model Tran description:text  amount:float debit:boolean`
-`$ rake db:create`
-`$ rake db:migrate`
+`$ rails new TestDB --database:postgresql`  
+`$ cd TestDB`  
+`$ rails g model Tran description:text  amount:float debit:boolean`  
+`$ rake db:create`  
+`$ rake db:migrate`  
