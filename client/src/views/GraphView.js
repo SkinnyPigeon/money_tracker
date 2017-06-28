@@ -101,7 +101,6 @@ GraphView.prototype = {
         this.time.push( this.makeUTC( this.transactions[i].created_at ));
         this.total.push( this.makeTotal( this.transactions[i], i ));
     }
-    console.log( this.time );
     this.display();
   },
 
@@ -126,12 +125,15 @@ GraphView.prototype = {
 
   makeTotal: function( transaction, index ) {
     if( transaction.debit ) {
-        var debit = parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2);
+        var debit = Math.round(transaction.amount * 100) / 100;
         this.total[ index ] -= debit;
     } else {
-        var credit = parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2);
+        console.log( transaction.amount );
+        var credit = Math.round(transaction.amount * 100) / 100;
+        var debit = Math.round(transaction.amount * 100) / 100;
+        console.log( credit );
+        console.log( debit );
         this.total[ index ] += credit;
-        // transaction.amount
     }
     console.log( this.total[ index ]);
     return this.total[ index ];

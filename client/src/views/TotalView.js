@@ -1,6 +1,6 @@
 var TotalView = function() {
-  // this.url = "http://localhost:5000/trans";
-  this.url = "https://money-tracker-test.herokuapp.com/trans";
+  this.url = "http://localhost:5000/trans";
+  // this.url = "https://money-tracker-test.herokuapp.com/trans";
   this.transactions = [];
   this.getTransactions();
   this.total = 0;
@@ -63,22 +63,14 @@ TotalView.prototype = {
       var amount = this.transactions[i].amount;
 
       if( this.transactions[i].debit ) {
-        amountText.innerText = "-" + 
-          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        amountText.innerText = "-" + ( Math.round( amount * 100 ) / 100 ).toFixed(2);
         amountText.style.color = "red";
-        // this.total -= 
-          // parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-        this.debit += 
-          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        this.debit += Math.round( amount * 100) / 100;
           console.log( this.debit );
       } else {
-        amountText.innerText = 
-          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        amountText.innerText = ( Math.round( amount * 100 ) / 100 ).toFixed(2);
         amountText.style.color = "black";
-        // this.total += 
-          // parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-        this.credit += 
-          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+        this.credit += ( Math.round( amount * 100 ) / 100 );
       }
 
 

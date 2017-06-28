@@ -63,8 +63,8 @@
 	var GraphView = __webpack_require__( 4 );
 	
 	function NavView() {
-	  // this.url = "http://localhost:5000/trans";
-	  this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  this.url = "http://localhost:5000/trans";
+	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.clear();
 	  this.getTransactions();
 	  this.display();
@@ -200,8 +200,8 @@
 	
 	function TransView() {
 	  this.display();
-	  // this.url = "http://localhost:5000/trans";
-	  this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  this.url = "http://localhost:5000/trans";
+	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
 	};
 	
 	TransView.prototype = {
@@ -330,8 +330,8 @@
 /***/ function(module, exports) {
 
 	var TotalView = function() {
-	  // this.url = "http://localhost:5000/trans";
-	  this.url = "https://money-tracker-test.herokuapp.com/trans";
+	  this.url = "http://localhost:5000/trans";
+	  // this.url = "https://money-tracker-test.herokuapp.com/trans";
 	  this.transactions = [];
 	  this.getTransactions();
 	  this.total = 0;
@@ -394,22 +394,14 @@
 	      var amount = this.transactions[i].amount;
 	
 	      if( this.transactions[i].debit ) {
-	        amountText.innerText = "-" + 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        amountText.innerText = "-" + ( Math.round( amount * 100 ) / 100 ).toFixed(2);
 	        amountText.style.color = "red";
-	        // this.total -= 
-	          // parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	        this.debit += 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        this.debit += Math.round( amount * 100) / 100;
 	          console.log( this.debit );
 	      } else {
-	        amountText.innerText = 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        amountText.innerText = ( Math.round( amount * 100 ) / 100 ).toFixed(2);
 	        amountText.style.color = "black";
-	        // this.total += 
-	          // parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-	        this.credit += 
-	          parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+	        this.credit += ( Math.round( amount * 100 ) / 100 );
 	      }
 	
 	
@@ -566,7 +558,6 @@
 	        this.time.push( this.makeUTC( this.transactions[i].created_at ));
 	        this.total.push( this.makeTotal( this.transactions[i], i ));
 	    }
-	    console.log( this.time );
 	    this.display();
 	  },
 	
@@ -591,12 +582,15 @@
 	
 	  makeTotal: function( transaction, index ) {
 	    if( transaction.debit ) {
-	        var debit = parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2);
+	        var debit = Math.round(transaction.amount * 100) / 100;
 	        this.total[ index ] -= debit;
 	    } else {
-	        var credit = parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2);
+	        console.log( transaction.amount );
+	        var credit = Math.round(transaction.amount * 100) / 100;
+	        var debit = Math.round(transaction.amount * 100) / 100;
+	        console.log( credit );
+	        console.log( debit );
 	        this.total[ index ] += credit;
-	        // transaction.amount
 	    }
 	    console.log( this.total[ index ]);
 	    return this.total[ index ];
