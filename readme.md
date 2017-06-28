@@ -14,3 +14,15 @@ You need node.js installed globally:
 Navigate to http://localhost:3000/ in your browser.
 
 You should now be on the main page of the application.
+
+Next comes the hard bit...
+
+**SETTING UP THE DATABASE**
+
+You'll need Ruby on Rails, PostgreSQL and RackCORS installed globally:
+
+`$ rails new TestDB --database:postgresql`
+`$ cd TestDB`
+`$ rails g model Tran description:text  amount:float debit:boolean`
+`$ rake db:create`
+`$ rake db:migrate`
