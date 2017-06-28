@@ -126,13 +126,12 @@ GraphView.prototype = {
 
   makeTotal: function( transaction, index ) {
     if( transaction.debit ) {
-        this.total[ index ] -= 
-        // transaction.amount
-        parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2)
+        var debit = parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2);
+        this.total[ index ] -= debit;
     } else {
-        this.total[ index ] += 
+        var credit = parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2);
+        this.total[ index ] += credit;
         // transaction.amount
-        parseFloat(Math.round(transaction.amount * 100) / 100).toFixed(2)
     }
     console.log( this.total[ index ]);
     return this.total[ index ];
