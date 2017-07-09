@@ -107,7 +107,7 @@ require_relative 'boot'
 require 'rails/all'
 Bundler.require(*Rails.groups)
 
-module BusDatabase
+module TranDatabase
   class Application < Rails::Application
     config.middleware.insert_before 0, "Rack::Cors" do
         allow do
@@ -130,23 +130,28 @@ Almost there. Just need to create the controllers that'll let us use the routes 
 Open up this file then paste the following in:
 
 ```ruby
-class ClientsController < ApplicationController
+class TransController < ApplicationController
+
+  before_action :authenticate_user!
 
   def index
-    clients = Client.all()
-    render :json => clients.to_json()
+    trans = Tran.where( :user_id => current_user.id )
+    render :json => trans.to_json()
   end
 
   def create
-    client = Client.create!( client_params )
-    client.save()
-    clients = Client.all()
-    render :json => clients.to_json()
+    tran = Tran.create( tran_params )
+    render json: tran, status: :created
+  end
+
+  def show
+    tran = Tran.find( params[:id] )
+    render :json => tran.to_json()
   end
 
   private
-  def client_params
-    params.require(:client).permit([ :name, :email, :number ])
+  def tran_params
+    params.require(:tran).permit([ :description, :amount, :debit, :user_id ])
   end
 
 end
