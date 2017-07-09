@@ -9,7 +9,7 @@ First things first, we need to clone this and make sure that the local host is w
 You need [node.js](https://nodejs.org/en/) installed globally:
 
 `$ git clone https://github.com/SkinnyPigeon/money_tracker`  
-`$ cd money_tracker_test`  
+`$ cd money_tracker`  
 `$ npm install`  
 `$ npm start`
 
