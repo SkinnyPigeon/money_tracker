@@ -151,7 +151,7 @@ class TransController < ApplicationController
 
   private
   def tran_params
-    params.require(:tran).permit([ :description, :amount, :debit, :user_id ])
+    params.require(:tran).permit([ :description, :amount, :debit ])
   end
 
 end
