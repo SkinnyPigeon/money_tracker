@@ -132,8 +132,6 @@ Open up this file then paste the following in:
 ```ruby
 class TransController < ApplicationController
 
-  before_action :authenticate_user!
-
   def index
     trans = Tran.where( :user_id => current_user.id )
     render :json => trans.to_json()
