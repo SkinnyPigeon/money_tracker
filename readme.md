@@ -23,7 +23,7 @@ Next comes the hard bit...
 
 You'll need [Ruby on Rails](https://www.youtube.com/watch?v=3Lp5XP8pWkU), [PostgreSQL](https://postgresapp.com/), [RackCORS](https://rubygems.org/gems/rack-cors/versions/0.4.0) and [Bundler](http://bundler.io/) installed globally:
 
-`$ rails new TestDB --database:postgresql`  
+`$ rails new TestDB --database=postgresql`  
 `$ cd TestDB`  
 `$ rails g model Tran description:text  amount:float debit:boolean`  
 `$ rake db:create`  
